@@ -1,8 +1,6 @@
 import { DocFileMeta } from "@fireproof/core";
 import React, { useState, useEffect, ImgHTMLAttributes } from "react";
 
-const { URL } = globalThis;
-
 // Union type to support both direct File objects and metadata objects
 type FileType = File | DocFileMeta;
 
@@ -50,8 +48,10 @@ export function ImgFile({ file, meta, ...imgProps }: ImgFileProps) {
       }
 
       if (fileObj && /image/.test(fileType)) {
+        // eslint-disable-next-line no-restricted-globals
         const src = URL.createObjectURL(fileObj);
         setImgDataUrl(src);
+        // eslint-disable-next-line no-restricted-globals
         return () => URL.revokeObjectURL(src);
       }
     };

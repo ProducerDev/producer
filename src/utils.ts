@@ -396,7 +396,7 @@ export function inplaceFilter<T>(i: T[], pred: (i: T, idx: number) => boolean): 
   return i;
 }
 
-export function toSortedArray(set?: Record<string, unknown>): Record<string, unknown>[] {
+export function toSortedArray<T extends NonNullable<unknown>>(set?: T): Record<string, unknown>[] {
   if (!set) return [];
   return Object.entries(set)
     .sort(([a], [b]) => a.localeCompare(b))
@@ -527,4 +527,11 @@ export async function hashObject<T extends NonNullable<S>, S>(o: T): Promise<str
 
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Deep clone a value
+ */
+export function deepClone<T>(value: T): T {
+  return (structuredClone ?? ((v: T) => JSON.parse(JSON.stringify(v))))(value);
 }
