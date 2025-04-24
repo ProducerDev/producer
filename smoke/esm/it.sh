@@ -20,7 +20,7 @@ smokeDir=$(pwd)
 #ls -la $projectBase/.esm-cache
 #$dockerCompose down || true
 #$dockerCompose up -d
-packageDir=${projectBase=}/dist/lucix-core
+packageDir=${projectBase=}/dist/fireproof-core
 
 #user="admin$(date +%s)"
 #curl --retry 10 --retry-max-time 30 --retry-all-errors http://localhost:4873/
@@ -42,7 +42,7 @@ packageDir=${projectBase=}/dist/lucix-core
 #; .npmrc
 #enable-pre-post-scripts=true
 #//localhost:4873/:_authToken=$token
-#@lucix:registry=http://localhost:4873
+#@fireproof:registry=http://localhost:4873
 #EOF
 
 #(cd $packageDir &&

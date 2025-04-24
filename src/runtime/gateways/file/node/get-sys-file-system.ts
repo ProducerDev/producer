@@ -1,4 +1,4 @@
-import type { SysFileSystem } from "@lucix/core";
+import type { SysFileSystem } from "@fireproof/core";
 import { NodeFileSystem } from "./node-filesystem.js";
 import { ResolveOnce, URI } from "@adviser/cement";
 

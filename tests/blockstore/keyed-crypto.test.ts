@@ -1,10 +1,10 @@
-import { bs, ensureSuperThis, PARAM, rt, StoreType, storeType2DataMetaWal } from "@lucix/core";
+import { bs, ensureSuperThis, PARAM, rt, StoreType, storeType2DataMetaWal } from "@fireproof/core";
 import { BuildURI, LogCollector, runtimeFn, toCryptoRuntime, URI } from "@adviser/cement";
 import { base58btc } from "multiformats/bases/base58";
 // import { sha256 as hasher } from "multiformats/hashes/sha2";
 // import * as dagCodec from "@ipld/dag-cbor";
 import * as cborg from "cborg";
-import type { KeyBagProviderIndexedDB } from "@lucix/core/indexeddb";
+import type { KeyBagProviderIndexedDB } from "@fireproof/core/indexeddb";
 import { mockLoader, MockSuperThis, mockSuperThis } from "../helpers.js";
 
 describe("KeyBag", () => {
@@ -27,7 +27,7 @@ describe("KeyBag", () => {
     if (runtimeFn().isBrowser) {
       expect(kb.rt.url.toString()).toBe(`indexeddb://fp-keybag`);
     } else {
-      expect(kb.rt.url.toString()).toBe(`file://${sthis.env.get("HOME")}/.lucix/keybag`);
+      expect(kb.rt.url.toString()).toBe(`file://${sthis.env.get("HOME")}/.fireproof/keybag`);
     }
     sthis.env.set("FP_KEYBAG_URL", old);
   });

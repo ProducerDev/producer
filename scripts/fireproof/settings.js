@@ -120,7 +120,7 @@ const require = createRequire(import.meta.url);
 
     builds.push(testEsmConfig);
 
-    if (/lucix\./.test(entryPoint)) {
+    if (/fireproof\./.test(entryPoint)) {
       const esmPublishConfig = {
         ...testEsmConfig,
         outfile: `dist/node/${filename}.esm.js`,
@@ -159,7 +159,7 @@ console.log('cjs/node build');
         ...commonSettings,
         outfile: `dist/browser/${filename}.iife.js`,
         format: "iife",
-        globalName: "Lucix",
+        globalName: "Fireproof",
         platform: "browser",
         target: "es2020",
         entryPoints: [entryPoint],

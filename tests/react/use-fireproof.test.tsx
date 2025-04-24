@@ -1,15 +1,15 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { lucix, useLucix } from "use-lucix";
-import type { Database, DocResponse, LiveQueryResult, UseDocumentResult } from "use-lucix";
+import { fireproof, useFireproof } from "use-fireproof";
+import type { Database, DocResponse, LiveQueryResult, UseDocumentResult } from "use-fireproof";
 
 const TEST_TIMEOUT = 45000;
 
-describe("HOOK: useLucix", () => {
+describe("HOOK: useFireproof", () => {
   it(
     "should be defined",
     () => {
-      expect(useLucix).toBeDefined();
+      expect(useFireproof).toBeDefined();
     },
     TEST_TIMEOUT,
   );
@@ -18,7 +18,7 @@ describe("HOOK: useLucix", () => {
     "renders the hook correctly and checks types",
     () => {
       renderHook(() => {
-        const { database, useLiveQuery, useDocument } = useLucix("dbname");
+        const { database, useLiveQuery, useDocument } = useFireproof("dbname");
         expect(typeof useLiveQuery).toBe("function");
         expect(typeof useDocument).toBe("function");
         expect(database?.constructor.name).toMatch(/^Database/);
@@ -28,16 +28,16 @@ describe("HOOK: useLucix", () => {
   );
 });
 
-describe("HOOK: useLucix useLiveQuery has results", () => {
+describe("HOOK: useFireproof useLiveQuery has results", () => {
   const dbName = "useLiveQueryHasResults";
   let db: Database,
     query: LiveQueryResult<{ foo: string }, string>,
-    database: ReturnType<typeof useLucix>["database"],
-    useLiveQuery: ReturnType<typeof useLucix>["useLiveQuery"];
+    database: ReturnType<typeof useFireproof>["database"],
+    useLiveQuery: ReturnType<typeof useFireproof>["useLiveQuery"];
 
   beforeEach(async () => {
     const expectedValues = ["aha", "bar", "caz"];
-    db = lucix(dbName);
+    db = fireproof(dbName);
     for (const value of expectedValues) {
       await db.put({ foo: value });
     }
@@ -50,7 +50,7 @@ describe("HOOK: useLucix useLiveQuery has results", () => {
     "queries correctly",
     async () => {
       renderHook(() => {
-        const result = useLucix(dbName);
+        const result = useFireproof(dbName);
         database = result.database;
         useLiveQuery = result.useLiveQuery;
         query = useLiveQuery<{ foo: string }>("foo");
@@ -71,18 +71,18 @@ describe("HOOK: useLucix useLiveQuery has results", () => {
   });
 });
 
-describe("HOOK: useLucix useDocument has results", () => {
+describe("HOOK: useFireproof useDocument has results", () => {
   const dbName = "useDocumentHasResults";
   let db: Database,
     docResult: UseDocumentResult<{ input: string }>,
-    database: ReturnType<typeof useLucix>["database"],
-    useDocument: ReturnType<typeof useLucix>["useDocument"];
+    database: ReturnType<typeof useFireproof>["database"],
+    useDocument: ReturnType<typeof useFireproof>["useDocument"];
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
 
     renderHook(() => {
-      const result = useLucix(dbName);
+      const result = useFireproof(dbName);
       database = result.database;
       useDocument = result.useDocument;
       docResult = useDocument<{ input: string }>({ input: "" });
@@ -206,18 +206,18 @@ describe("HOOK: useLucix useDocument has results", () => {
   });
 });
 
-describe("HOOK: useLucix useDocument has results reset sync", () => {
+describe("HOOK: useFireproof useDocument has results reset sync", () => {
   const dbName = "useDocumentHasResultsSync";
   let db: Database,
     docResult: UseDocumentResult<{ input: string }>,
-    database: ReturnType<typeof useLucix>["database"],
-    useDocument: ReturnType<typeof useLucix>["useDocument"];
+    database: ReturnType<typeof useFireproof>["database"],
+    useDocument: ReturnType<typeof useFireproof>["useDocument"];
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
 
     renderHook(() => {
-      const result = useLucix(dbName);
+      const result = useFireproof(dbName);
       database = result.database;
       useDocument = result.useDocument;
       docResult = useDocument<{ input: string }>({ input: "" });
@@ -334,21 +334,21 @@ describe("HOOK: useLucix useDocument has results reset sync", () => {
   });
 });
 
-describe("HOOK: useLucix useDocument with existing document has results", () => {
+describe("HOOK: useFireproof useDocument with existing document has results", () => {
   const dbName = "useDocumentWithExistingDoc";
   let db: Database,
     docResult: UseDocumentResult<{ input: string }>,
     id: string,
-    database: ReturnType<typeof useLucix>["database"],
-    useDocument: ReturnType<typeof useLucix>["useDocument"];
+    database: ReturnType<typeof useFireproof>["database"],
+    useDocument: ReturnType<typeof useFireproof>["useDocument"];
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
     const res = await db.put({ input: "initial" });
     id = res.id;
 
     renderHook(() => {
-      const result = useLucix(dbName);
+      const result = useFireproof(dbName);
       database = result.database;
       useDocument = result.useDocument;
       docResult = useDocument<{ input: string }>({ _id: id } as { _id: string; input: string });
@@ -408,21 +408,21 @@ describe("HOOK: useLucix useDocument with existing document has results", () => 
   });
 });
 
-describe("HOOK: useLucix useDocument with existing document handles external updates", () => {
+describe("HOOK: useFireproof useDocument with existing document handles external updates", () => {
   const dbName = "useDocumentWithExternalUpdates";
   let db: Database,
     docResult: UseDocumentResult<{ input: string }>,
     id: string,
-    database: ReturnType<typeof useLucix>["database"],
-    useDocument: ReturnType<typeof useLucix>["useDocument"];
+    database: ReturnType<typeof useFireproof>["database"],
+    useDocument: ReturnType<typeof useFireproof>["useDocument"];
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
     const res = await db.put({ input: "initial" });
     id = res.id;
 
     renderHook(() => {
-      const result = useLucix(dbName);
+      const result = useFireproof(dbName);
       database = result.database;
       useDocument = result.useDocument;
       docResult = useDocument<{ input: string }>({ _id: id } as { _id: string; input: string });
@@ -483,18 +483,18 @@ describe("HOOK: useLucix useDocument with existing document handles external upd
   });
 });
 
-describe("HOOK: useLucix bug fix: once the ID is set, it can reset", () => {
+describe("HOOK: useFireproof bug fix: once the ID is set, it can reset", () => {
   const dbName = "bugTestDocReset";
   let db: Database,
     docResult: UseDocumentResult<{ input: string }>,
-    database: ReturnType<typeof useLucix>["database"],
-    useDocument: ReturnType<typeof useLucix>["useDocument"];
+    database: ReturnType<typeof useFireproof>["database"],
+    useDocument: ReturnType<typeof useFireproof>["useDocument"];
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
 
     renderHook(() => {
-      const result = useLucix(dbName);
+      const result = useFireproof(dbName);
       database = result.database;
       useDocument = result.useDocument;
       docResult = useDocument<{ input: string }>({ input: "" });
@@ -555,16 +555,16 @@ describe("HOOK: useLucix bug fix: once the ID is set, it can reset", () => {
   });
 });
 
-describe("HOOK: useLucix race condition: calling save() without await overwrites reset", () => {
+describe("HOOK: useFireproof race condition: calling save() without await overwrites reset", () => {
   const dbName = "raceConditionDb";
   let db: Database, docResult: UseDocumentResult<{ input: string }>;
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
 
     // Render a new hook instance
     renderHook(() => {
-      const { useDocument } = useLucix(dbName);
+      const { useDocument } = useFireproof(dbName);
       docResult = useDocument<{ input: string }>({ input: "" });
     });
   });
@@ -603,16 +603,16 @@ describe("HOOK: useLucix race condition: calling save() without await overwrites
   });
 });
 
-describe("useLucix calling submit()", () => {
+describe("useFireproof calling submit()", () => {
   const dbName = "submitDb";
   let db: Database, docResult: UseDocumentResult<{ input: string }>;
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
 
     // Render a new hook instance
     renderHook(() => {
-      const { useDocument } = useLucix(dbName);
+      const { useDocument } = useFireproof(dbName);
       docResult = useDocument<{ input: string }>({ input: "" });
     });
   });

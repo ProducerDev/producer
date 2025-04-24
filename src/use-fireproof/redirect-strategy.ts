@@ -1,6 +1,6 @@
 import { BuildURI, Logger, URI } from "@adviser/cement";
-import { rt, sleep } from "@lucix/core";
-import { WebCtx, WebToCloudCtx } from "@lucix/core/react";
+import { rt, sleep } from "@fireproof/core";
+import { WebCtx, WebToCloudCtx } from "@fireproof/core/react";
 
 export class RedirectStrategy implements rt.gw.cloud.TokenStrategie {
   open(logger: Logger, deviceId: string, opts: rt.gw.cloud.ToCloudOpts) {

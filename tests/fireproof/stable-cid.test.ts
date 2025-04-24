@@ -1,5 +1,5 @@
 import { sha256 } from "multiformats/hashes/sha2";
-import { ensureSuperThis, rt, bs } from "@lucix/core";
+import { ensureSuperThis, rt, bs } from "@fireproof/core";
 import { base58btc } from "multiformats/bases/base58";
 import { URI, toCryptoRuntime } from "@adviser/cement";
 import * as cborg from "cborg";

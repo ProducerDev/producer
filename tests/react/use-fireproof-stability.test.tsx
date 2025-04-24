@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { createElement, useEffect, useState } from "react";
-import { useLucix } from "../../src/react/use-lucix.js";
+import { useFireproof } from "../../src/react/use-fireproof.js";
 
 // Extend HTMLElement for TypeScript compatibility
 declare global {
@@ -15,7 +15,7 @@ declare global {
 
 // Test component that triggers state updates and verifies database stability
 function TestComponent() {
-  const { database } = useLucix("test-stability-db");
+  const { database } = useFireproof("test-stability-db");
   const [counter, setCounter] = useState(0);
   const initialDatabaseRef = database;
 
@@ -43,7 +43,7 @@ function TestComponent() {
 // Test timeout value for CI
 const TEST_TIMEOUT = 60000; // 1 minute per test
 
-describe("HOOK: useLucix stability", () => {
+describe("HOOK: useFireproof stability", () => {
   it(
     "database instance remains stable across renders",
     async () => {
@@ -96,7 +96,7 @@ describe("HOOK: useLucix stability", () => {
       function InputTestComponent() {
         // We still create the database to ensure no infinite render loops occur
         // But we don't need to use any of its features directly in this test
-        useLucix("test-input-db");
+        useFireproof("test-input-db");
         const [inputValue, setInputValue] = useState("");
         const [renderCount, setRenderCount] = useState(0);
 

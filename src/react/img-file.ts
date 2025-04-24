@@ -1,4 +1,4 @@
-import { DocFileMeta } from "@lucix/core";
+import { DocFileMeta } from "@fireproof/core";
 import React, { useState, useEffect, ImgHTMLAttributes } from "react";
 
 // Union type to support both direct File objects and metadata objects

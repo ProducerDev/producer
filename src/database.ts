@@ -162,7 +162,7 @@ export class DatabaseImpl implements Database {
     return this.ledger.subscribe(listener, updates);
   }
 
-  // todo if we add this onto dbs in lucix.ts then we can make index.ts a separate package
+  // todo if we add this onto dbs in fireproof.ts then we can make index.ts a separate package
   async query<K extends IndexKeyType, T extends DocTypes, R extends DocFragment = T>(
     field: string | MapFn<T>,
     opts: QueryOpts<K> = {},

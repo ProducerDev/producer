@@ -90,11 +90,11 @@ export class SessionTokenService {
   }
 
   get isssuer() {
-    return this.#param.issuer ?? "lucix";
+    return this.#param.issuer ?? "fireproof";
   }
 
   get audience() {
-    return this.#param.audience ?? "lucix";
+    return this.#param.audience ?? "fireproof";
   }
 
   async validate(token: string): Promise<Result<JWTVerifyResult<FPCloudClaim>>> {

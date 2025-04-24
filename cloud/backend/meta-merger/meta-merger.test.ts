@@ -1,6 +1,6 @@
 import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql";
 import { Connection, MetaMerge, MetaMerger } from "./meta-merger.js";
-import { rt, SuperThis } from "@lucix/core";
+import { rt, SuperThis } from "@fireproof/core";
 import { testSuperThis } from "../../test-super-this.js";
 // import { SQLDatabase } from "./abstract-sql.js";
 // import { drizzle, LibSQLDatabase } from "drizzle-orm/libsql";

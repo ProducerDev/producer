@@ -3,7 +3,7 @@ import { sha256 as hasher } from "multiformats/hashes/sha2";
 import { BlockView } from "multiformats";
 import { CID } from "multiformats/cid";
 import { MemoryBlockstore } from "@web3-storage/pail/block";
-import { CRDTMeta, CarTransaction, IndexTransactionMeta, SuperThis, bs, ensureSuperThis, rt } from "@lucix/core";
+import { CRDTMeta, CarTransaction, IndexTransactionMeta, SuperThis, bs, ensureSuperThis, rt } from "@fireproof/core";
 import { simpleBlockOpts } from "../helpers.js";
 
 class MyMemoryBlockStore extends bs.EncryptedBlockstore {

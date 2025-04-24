@@ -1,4 +1,4 @@
-import type { FPStats, SysFileSystem } from "@lucix/core";
+import type { FPStats, SysFileSystem } from "@fireproof/core";
 import { to_uint8 } from "@adviser/cement";
 
 export class DenoFileSystem implements SysFileSystem {

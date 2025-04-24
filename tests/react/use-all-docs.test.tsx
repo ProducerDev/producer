@@ -1,21 +1,21 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it, beforeEach, afterEach } from "vitest";
-import { lucix, useLucix } from "use-lucix";
-import type { Database } from "use-lucix";
+import { fireproof, useFireproof } from "use-fireproof";
+import type { Database } from "use-fireproof";
 import type { AllDocsResult } from "../../src/react/types.js";
 
 // Test timeout value for CI
 const TEST_TIMEOUT = 45000;
 
-describe("HOOK: useLucix useAllDocs", () => {
+describe("HOOK: useFireproof useAllDocs", () => {
   const dbName = "useAllDocsTest";
   let db: Database,
-    database: ReturnType<typeof useLucix>["database"],
-    useAllDocs: ReturnType<typeof useLucix>["useAllDocs"];
+    database: ReturnType<typeof useFireproof>["database"],
+    useAllDocs: ReturnType<typeof useFireproof>["useAllDocs"];
 
   beforeEach(async () => {
     const expectedValues = ["apple", "banana", "cherry"];
-    db = lucix(dbName);
+    db = fireproof(dbName);
     for (const value of expectedValues) {
       await db.put({ fruit: value });
     }
@@ -30,7 +30,7 @@ describe("HOOK: useLucix useAllDocs", () => {
       let result: AllDocsResult<{ fruit: string }>;
 
       renderHook(() => {
-        const hookResult = useLucix(dbName);
+        const hookResult = useFireproof(dbName);
         database = hookResult.database;
         useAllDocs = hookResult.useAllDocs;
         result = useAllDocs<{ fruit: string }>();
@@ -50,7 +50,7 @@ describe("HOOK: useLucix useAllDocs", () => {
       let allDocsResult: AllDocsResult<{ fruit: string }>;
 
       renderHook(() => {
-        const hookResult = useLucix(dbName);
+        const hookResult = useFireproof(dbName);
         database = hookResult.database;
         useAllDocs = hookResult.useAllDocs;
         allDocsResult = useAllDocs<{ fruit: string }>();
@@ -81,7 +81,7 @@ describe("HOOK: useLucix useAllDocs", () => {
 
       // Render the hook in a way we can unmount it
       const { unmount, result } = renderHook(() => {
-        const hookResult = useLucix(dbName);
+        const hookResult = useFireproof(dbName);
         database = hookResult.database;
         useAllDocs = hookResult.useAllDocs;
         return useAllDocs<{ fruit: string }>();
@@ -115,7 +115,7 @@ describe("HOOK: useLucix useAllDocs", () => {
       let allDocsResult: AllDocsResult<{ fruit: string }>;
 
       renderHook(() => {
-        const hookResult = useLucix(dbName);
+        const hookResult = useFireproof(dbName);
         database = hookResult.database;
         useAllDocs = hookResult.useAllDocs;
         // Pass query parameters to the hook
@@ -140,7 +140,7 @@ describe("HOOK: useLucix useAllDocs", () => {
       let queryParams = {};
 
       const { rerender } = renderHook(() => {
-        const hookResult = useLucix(dbName);
+        const hookResult = useFireproof(dbName);
         database = hookResult.database;
         useAllDocs = hookResult.useAllDocs;
         allDocsResult = useAllDocs<{ fruit: string }>(queryParams);

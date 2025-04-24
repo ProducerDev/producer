@@ -1,4 +1,4 @@
-import { ps } from "@lucix/core";
+import { ps } from "@fireproof/core";
 
 import { WSContextWithId } from "./hono-server.js";
 import { ConnItem } from "./msg-dispatch.js";

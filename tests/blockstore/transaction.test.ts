@@ -1,5 +1,5 @@
 import { CID } from "multiformats";
-import { BaseBlockstore, bs, CarTransaction, ensureSuperThis, SuperThis } from "@lucix/core";
+import { BaseBlockstore, bs, CarTransaction, ensureSuperThis, SuperThis } from "@fireproof/core";
 import { simpleBlockOpts } from "../helpers.js";
 
 describe("Fresh TransactionBlockstore", function () {

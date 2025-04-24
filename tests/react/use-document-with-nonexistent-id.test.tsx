@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it, beforeEach, afterEach } from "vitest";
-import { lucix, useLucix } from "use-lucix";
-import type { Database, UseDocumentResult } from "use-lucix";
+import { fireproof, useFireproof } from "use-fireproof";
+import type { Database, UseDocumentResult } from "use-fireproof";
 
 const TEST_TIMEOUT = 45000;
 
@@ -18,12 +18,12 @@ describe("HOOK: useDocument with non-existent ID", () => {
   const dbName = "useDocumentWithNonExistentId";
   let db: Database;
   let settingsResult: UseDocumentResult<TestTypeDoc>;
-  let database: ReturnType<typeof useLucix>["database"];
-  let useDocument: ReturnType<typeof useLucix>["useDocument"];
+  let database: ReturnType<typeof useFireproof>["database"];
+  let useDocument: ReturnType<typeof useFireproof>["useDocument"];
   const testId = "test_settings";
 
   beforeEach(async () => {
-    db = lucix(dbName);
+    db = fireproof(dbName);
 
     // Make sure the document doesn't exist
     try {
@@ -38,7 +38,7 @@ describe("HOOK: useDocument with non-existent ID", () => {
     }
 
     renderHook(() => {
-      const result = useLucix(dbName);
+      const result = useFireproof(dbName);
       database = result.database;
       useDocument = result.useDocument;
       settingsResult = useDocument<TestTypeDoc>({ _id: testId, testField: "test" });

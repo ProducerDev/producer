@@ -1,5 +1,5 @@
 import { Future, Logger, Result } from "@adviser/cement";
-import { SuperThis } from "@lucix/core";
+import { SuperThis } from "@fireproof/core";
 import { CalculatePreSignedUrl } from "./msg-types-data.js";
 import type { JWTPayload } from "jose";
 // import { PreSignedMsg } from "./pre-signed-url.js";

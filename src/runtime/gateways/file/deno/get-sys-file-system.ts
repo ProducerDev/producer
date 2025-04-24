@@ -1,4 +1,4 @@
-import type { SysFileSystem } from "@lucix/core";
+import type { SysFileSystem } from "@fireproof/core";
 import { DenoFileSystem } from "./deno-filesystem.js";
 import { ResolveOnce, URI } from "@adviser/cement";
 

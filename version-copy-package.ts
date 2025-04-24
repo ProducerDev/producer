@@ -27,7 +27,7 @@ async function patchVersion(packageJson: Record<string, unknown>) {
 async function createDenoJson(destDir: string, packageJson: Record<string, unknown>) {
   const denoJson = {
     imports: {
-      "@lucix/core": "./index.js",
+      "@fireproof/core": "./index.js",
     },
   };
   const pdeps = packageJson.dependencies as Record<string, string>;
@@ -70,7 +70,7 @@ async function main() {
   const destPackageJson = JSON.parse(await fs.readFile(templateFile, "utf-8"));
   // copy version from package.json
   const withCoreVersion = {
-    "@lucix/core": `^${getVersion()}`,
+    "@fireproof/core": `^${getVersion()}`,
     ...mainPackageJson.dependencies,
   };
   transferVersionsFromPackageJson(withCoreVersion, destPackageJson.dependencies);

@@ -1,4 +1,4 @@
-import { SuperThis, UnReg, ps, rt } from "@lucix/core";
+import { SuperThis, UnReg, ps, rt } from "@fireproof/core";
 
 import { CORS, ExposeCtxItemWithImpl, HonoServerImpl, WSContextWithId } from "./hono-server.js";
 import { WSRoom } from "./ws-room.js";

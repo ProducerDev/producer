@@ -5,9 +5,9 @@ export function sysFileSystemFactory(uri: URI): Promise<SysFileSystem> {
   const rt = runtimeFn();
   switch (true) {
     case rt.isNodeIsh:
-      return import("@lucix/core/node").then((m) => m.getSysFileSystem(uri));
+      return import("@fireproof/core/node").then((m) => m.getSysFileSystem(uri));
     case rt.isDeno:
-      return import("@lucix/core/deno").then((m) => m.getSysFileSystem(uri));
+      return import("@fireproof/core/deno").then((m) => m.getSysFileSystem(uri));
     default:
       throw new Error(`unsupported runtime:${rt}`);
   }

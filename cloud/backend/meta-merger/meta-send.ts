@@ -1,7 +1,7 @@
 // import { ResolveOnce } from "@adviser/cement";
 import { sqlMetaByTenantLedger } from "./meta-by-tenant-ledger.js";
 import { ByConnection } from "./meta-merger.js";
-import { CRDTEntry } from "@lucix/core";
+import { CRDTEntry } from "@fireproof/core";
 // import { SQLDatabase, SQLStatement } from "./abstract-sql.js";
 import { foreignKey, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { and, eq, inArray, notInArray } from "drizzle-orm";

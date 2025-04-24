@@ -1,5 +1,5 @@
 import { BuildURI, CoerceURI, Logger, ResolveOnce, URI } from "@adviser/cement";
-import { Attachable, bs, ensureLogger, Ledger, FPContext, hashObject } from "@lucix/core";
+import { Attachable, bs, ensureLogger, Ledger, FPContext, hashObject } from "@fireproof/core";
 import { decodeJwt } from "jose/jwt/decode";
 
 export interface TokenStrategie {
@@ -53,7 +53,7 @@ function addTenantAndLedger(opts: ToCloudOptionalOpts, uri: CoerceURI): URI {
 }
 
 function defaultOpts(opts: ToCloudOptionalOpts): ToCloudOpts {
-  const base = opts.urls?.base ?? "fpcloud://lucix-v2-cloud-dev.jchris.workers.dev";
+  const base = opts.urls?.base ?? "fpcloud://fireproof-v2-cloud-dev.jchris.workers.dev";
   const param = {
     car: addTenantAndLedger(opts, opts.urls?.car ?? base),
     file: addTenantAndLedger(opts, opts.urls?.file ?? base),

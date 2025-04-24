@@ -11,7 +11,7 @@ import {
   CarTransaction,
   Falsy,
   FPContext,
-} from "@lucix/core";
+} from "@fireproof/core";
 import { CID } from "multiformats";
 import { sha256 } from "multiformats/hashes/sha2";
 import * as json from "multiformats/codecs/json";
@@ -31,7 +31,7 @@ export async function buildBlobFiles(): Promise<FileWithCid[]> {
   const cp = toCryptoRuntime();
   return [
     await toFileWithCid(cp.randomBytes(Math.random() * 51283), `image.jpg`, { type: "image/jpeg" }),
-    await toFileWithCid(cp.randomBytes(Math.random() * 51283), `lucix.png`, { type: "image/png" }),
+    await toFileWithCid(cp.randomBytes(Math.random() * 51283), `fireproof.png`, { type: "image/png" }),
   ];
 }
 

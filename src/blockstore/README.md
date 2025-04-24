@@ -34,16 +34,16 @@ This blockstore is excellent for any data structure that you want to persist loc
 
 ### Working with CRDTs
 
-For correctness, you'll want to have a data structure that can merge incoming data. There are very many of these. It's important because updates can come from anywhere in any order. The blockstore will make sure that all the blocks are available by CID, but it's up to your code to merge the incoming data. If your merge operation is commutative, then you can merge in any order. Warning, if you try to privilege your local data, or otherwise make a lossy merge, your app will have trouble syncing. If this sounds like something you don't want to worry about, then you should probably be using one of the libraries that depend on Encrypted Blockstore, like [Lucix](https://use-lucix.com) which gives a MongoDB-like API and handles the merging and sync for you.
+For correctness, you'll want to have a data structure that can merge incoming data. There are very many of these. It's important because updates can come from anywhere in any order. The blockstore will make sure that all the blocks are available by CID, but it's up to your code to merge the incoming data. If your merge operation is commutative, then you can merge in any order. Warning, if you try to privilege your local data, or otherwise make a lossy merge, your app will have trouble syncing. If this sounds like something you don't want to worry about, then you should probably be using one of the libraries that depend on Encrypted Blockstore, like [Fireproof](https://use-fireproof.com) which gives a MongoDB-like API and handles the merging and sync for you.
 
 ## Setup
 
 To configure the blockstore, you need to provide a callback and some implementations. The callback is called on every transaction and is where you can do things like update your UI or merge the incoming data with your data structures. The implementations are for the storage and encryption functions, which can vary by platform. The blockstore ships with basic implementations for the browser and the local filesystem, but you can also provide your own to fit your platform.
 
 ```js
-import { EncryptedBlockstore } from "@lucix/encrypted-blockstore";
-import * as crypto from "@lucix/encrypted-blockstore/crypto-web";
-import * as store from "@lucix/encrypted-blockstore/store-web";
+import { EncryptedBlockstore } from "@fireproof/encrypted-blockstore";
+import * as crypto from "@fireproof/encrypted-blockstore/crypto-web";
+import * as store from "@fireproof/encrypted-blockstore/store-web";
 
 const blockstoreConfig = {
   name: "my-app",
@@ -72,7 +72,7 @@ The `applyMeta` function can call into your data structures to merge the incomin
 
 Without compaction, your blockstore will grow with each transaction, as each transaction is committed to a new immutable CAR file. This results in thousands of small files, many containing duplicate or out-of-date data. If you don't provide a compaction function, the blockstore can use a default compaction function that deduplicates and preserves all the CIDs in the set, into a single file (coming soon). Your data structure can do better, as it will know which blocks can be safely discarded. Implement compaction as a callback that is passed a blockstore instance which logs any blocks that it reads. Your function should traverse your entire dataset. At the end the blockstore writes out a new unified CAR file, with links to the old CAR files. This speeds up sync and read times because it results in a single CAR file that contains all the deduplicated blocks.
 
-The `compact` function above is an example of this, or see the [Lucix compaction function in the CRDT library](https://github.com/lucix-storage/lucix/blob/main/packages/lucix/src/crdt.ts) for another example.
+The `compact` function above is an example of this, or see the [Fireproof compaction function in the CRDT library](https://github.com/fireproof-storage/fireproof/blob/main/packages/fireproof/src/crdt.ts) for another example.
 
 The blockstore will take care to update the header and write out a fresh CAR file with all the blocks. This CAR file will be faster to fetch, and new operations will be performed as a diff against this CAR file.
 
@@ -82,21 +82,21 @@ In shared storage situations, just because compaction has removed references to 
 
 ## Encryption
 
-Encrypted Blockstore uses symmetric keys, and each blockstore generates its own key. This means that files are opaque to storage providers, but the key is broadcast on the metadata channel, so it's up to you how secure you want to make it. [Read about the encryption model in the Lucix docs here](https://use-lucix.com/docs/ledger-api/encryption). The blockstore was extracted from Lucix, so for the first releases you'll want to read the Lucix docs for more information.
+Encrypted Blockstore uses symmetric keys, and each blockstore generates its own key. This means that files are opaque to storage providers, but the key is broadcast on the metadata channel, so it's up to you how secure you want to make it. [Read about the encryption model in the Fireproof docs here](https://use-fireproof.com/docs/ledger-api/encryption). The blockstore was extracted from Fireproof, so for the first releases you'll want to read the Fireproof docs for more information.
 
 ## Connectors
 
-The blockstore layer includes all the Lucix connectors, so you can leverage all the work that has been done there, and easily sync your data to any cloud storage provider. There are always more connectors, so [check here for the main collection.](https://github.com/lucix-storage/lucix/tree/main/packages)
+The blockstore layer includes all the Fireproof connectors, so you can leverage all the work that has been done there, and easily sync your data to any cloud storage provider. There are always more connectors, so [check here for the main collection.](https://github.com/fireproof-storage/fireproof/tree/main/packages)
 
-- [S3](https://github.com/lucix-storage/valid-cid-s3-bucket) - Verified storage for CAR files, using Lambda and signed URLs
-- [Netlify](https://www.npmjs.com/package/@lucix/netlify) - CAR file storage and shared CRDT access
-- [PartyKit](https://www.npmjs.com/package/@lucix/partykit) - Cloudflare Workers for realtime sync and storage
-- [web3.storage](https://www.npmjs.com/package/@lucix/ucan) - I heard you like IPFS, so I put your IPFS blocks in encrypted CAR files on IPFS
+- [S3](https://github.com/fireproof-storage/valid-cid-s3-bucket) - Verified storage for CAR files, using Lambda and signed URLs
+- [Netlify](https://www.npmjs.com/package/@fireproof/netlify) - CAR file storage and shared CRDT access
+- [PartyKit](https://www.npmjs.com/package/@fireproof/partykit) - Cloudflare Workers for realtime sync and storage
+- [web3.storage](https://www.npmjs.com/package/@fireproof/ucan) - I heard you like IPFS, so I put your IPFS blocks in encrypted CAR files on IPFS
 
 ## Architecture
 
-Read about the overall architecture in the [Lucix docs](https://use-lucix.com/docs/architecture).
+Read about the overall architecture in the [Fireproof docs](https://use-fireproof.com/docs/architecture).
 
 ## Contributing
 
-Please [join the Lucix discord to discuss the project and get involved.](https://discord.gg/cCryrNHePH)
+Please [join the Fireproof discord to discuss the project and get involved.](https://discord.gg/cCryrNHePH)

@@ -1,4 +1,4 @@
-import { CRDTEntry } from "@lucix/core";
+import { CRDTEntry } from "@fireproof/core";
 import { sqlTenantLedger } from "./tenant-ledger.js";
 import { ByConnection } from "./meta-merger.js";
 import { foreignKey, primaryKey, sqliteTable, text, index } from "drizzle-orm/sqlite-core";

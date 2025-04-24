@@ -1,4 +1,4 @@
-import { Database, ensureSuperThis, lucix } from "@lucix/core";
+import { Database, ensureSuperThis, fireproof } from "@fireproof/core";
 
 interface DBItem {
   readonly db: Database;
@@ -26,7 +26,7 @@ describe("Multiple Databases", () => {
         .fill(0)
         .map(async (_, i) => {
           const name = `db-${group}-${i}`;
-          const db = lucix(name);
+          const db = fireproof(name);
           dbs.push({ db, name });
           for (let i = 0; i < rows; i++) {
             await db.put({ _id: `${name}-${i}`, hello: "world" });

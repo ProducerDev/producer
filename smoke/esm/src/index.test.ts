@@ -9,14 +9,14 @@ it("esm.sh", async () => {
   console.log("FP_DEBUG", (window as unknown as { FP_DEBUG: string }).FP_DEBUG);
   // eslint-disable-next-line no-console
   console.log("FP_STACK", (window as unknown as { FP_STACK: string }).FP_STACK);
-  // const res = await fetch(`http://localhost:4874/@lucix/core@${window.FP_VERSION}?no-dts`);
+  // const res = await fetch(`http://localhost:4874/@fireproof/core@${window.FP_VERSION}?no-dts`);
   // // console.log("window-res", await res.text());
-  // const { lucix } = await import(/* @vite-ignore */ `http://localhost:4874/@lucix/core@${window.FP_VERSION}?no-dts`);
-  // // console.log("window-imp", lucix);
+  // const { fireproof } = await import(/* @vite-ignore */ `http://localhost:4874/@fireproof/core@${window.FP_VERSION}?no-dts`);
+  // // console.log("window-imp", fireproof);
 
   script.textContent = `
 //console.log("pre-window-js", window.FP_VERSION)
-import { lucix } from 'http://localhost:4874/@lucix/core@${window.FP_VERSION}?no-dts'
+import { fireproof } from 'http://localhost:4874/@fireproof/core@${window.FP_VERSION}?no-dts'
 
 console.log("SCRIPT FP_VERSION", window.FP_VERSION)
 function invariant(cond, message) {
@@ -25,7 +25,7 @@ function invariant(cond, message) {
   }
 }
 async function action(label, run) {
-  const db = lucix("esm-test");
+  const db = fireproof("esm-test");
   const ok = await db.put({ sort: Math.random(), test: "esm-success" });
 
   const beforeAll = await db.allDocs()

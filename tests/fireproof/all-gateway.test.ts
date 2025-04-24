@@ -1,4 +1,4 @@
-import { Database, Ledger, LedgerFactory, PARAM, bs, ensureSuperThis, lucix } from "@lucix/core";
+import { Database, Ledger, LedgerFactory, PARAM, bs, ensureSuperThis, fireproof } from "@fireproof/core";
 
 import { fileContent } from "./cars/bafkreidxwt2nhvbl4fnqfw3ctlt6zbrir4kqwmjo5im6rf4q5si27kgo2i.js";
 import { simpleCID } from "../helpers.js";
@@ -380,7 +380,7 @@ describe("noop Gateway subscribe", function () {
     await db.destroy();
   });
   beforeEach(async () => {
-    db = lucix("test-gateway-" + sthis.nextId().str);
+    db = fireproof("test-gateway-" + sthis.nextId().str);
 
     await db.ready();
 
@@ -435,7 +435,7 @@ describe("Gateway", function () {
     await db.destroy();
   });
   beforeEach(async () => {
-    db = lucix("test-gateway-" + sthis.nextId().str);
+    db = fireproof("test-gateway-" + sthis.nextId().str);
     ctx = { loader: db.ledger.crdt.blockstore.loader };
     const ok = await db.put({ _id: "test", foo: "bar" });
     expect(ok).toBeTruthy();

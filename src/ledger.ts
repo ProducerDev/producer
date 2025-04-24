@@ -317,6 +317,6 @@ export function toStoreURIRuntime(sthis: SuperThis, name: string, sopts?: StoreU
   };
 }
 
-export function lucix(name: string, opts?: ConfigOpts): Database {
+export function fireproof(name: string, opts?: ConfigOpts): Database {
   return new DatabaseImpl(LedgerFactory(name, opts));
 }

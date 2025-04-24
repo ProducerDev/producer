@@ -1,4 +1,4 @@
-name = "lucix-v2-cloud"
+name = "fireproof-v2-cloud"
 main = "server.ts"
 compatibility_date = "2025-02-24"
 # not really needed, but there are some warning of type imports

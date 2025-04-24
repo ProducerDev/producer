@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import { mockJWK } from "../node/test-helper.js";
-import { ensureSuperThis, rt } from "@lucix/core";
+import { ensureSuperThis, rt } from "@fireproof/core";
 import { $, dotenv } from "zx";
 import { setupBackendD1 } from "./setup-backend-d1.js";
 import type { TestProject } from "vitest/node";

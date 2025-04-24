@@ -10,9 +10,9 @@ import {
   keyConfigOpts,
   ensureSuperThis,
   Database,
-  lucix,
+  fireproof,
   LedgerShell,
-} from "@lucix/core";
+} from "@fireproof/core";
 
 describe("basic Ledger", () => {
   let db: Database;
@@ -23,7 +23,7 @@ describe("basic Ledger", () => {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix(undefined as unknown as string, {
+    db = fireproof(undefined as unknown as string, {
       logger: sthis.logger,
     });
   });
@@ -61,7 +61,7 @@ describe("basic Ledger with record", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("factory-name");
+    db = fireproof("factory-name");
     const ok = await db.put<Doc>({ _id: "hello", value: "world" });
     expect(ok.id).toBe("hello");
   });
@@ -100,7 +100,7 @@ describe("basic Ledger with record", function () {
     expect(rows[0].value._id).toBe("hello");
   });
   it("is not persisted", async () => {
-    const db2 = lucix("factory-name");
+    const db2 = fireproof("factory-name");
     const { rows } = await db2.changes([]);
     expect(rows.length).toBe(1);
     // assert((db.ledger.ref === db2.ledger.ref, "should be the same ledger");
@@ -123,7 +123,7 @@ describe("named Ledger with record", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-db-name");
+    db = fireproof("test-db-name");
     /** @type {Doc} */
     const doc = { _id: "hello", value: "world" };
     const ok = await db.put(doc);
@@ -311,7 +311,7 @@ describe("basic Ledger parallel writes / public ordered", () => {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-parallel-writes-ordered", { writeQueue: { chunkSize: 1 } });
+    db = fireproof("test-parallel-writes-ordered", { writeQueue: { chunkSize: 1 } });
     for (let i = 0; i < 10; i++) {
       const doc = { _id: `id-${i}`, hello: "world" };
       writes.push(db.put(doc));
@@ -345,7 +345,7 @@ describe("basic Ledger parallel writes / public", () => {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-parallel-writes", { writeQueue: { chunkSize: 32 } });
+    db = fireproof("test-parallel-writes", { writeQueue: { chunkSize: 32 } });
     for (let i = 0; i < 10; i++) {
       const doc = { _id: `id-${i}`, hello: "world" };
       writes.push(db.put(doc));
@@ -428,7 +428,7 @@ describe("basic Ledger with subscription", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("factory-name");
+    db = fireproof("factory-name");
     didRun = 0;
     waitForSub = new Promise((resolve) => {
       unsubscribe = db.subscribe((docs) => {
@@ -471,7 +471,7 @@ describe("basic Ledger with no update subscription", function () {
     await db.destroy();
   });
   beforeEach(async () => {
-    db = lucix("factory-name");
+    db = fireproof("factory-name");
     didRun = 0;
     unsubscribe = db.subscribe(() => {
       didRun++;
@@ -509,7 +509,7 @@ describe("ledger with files input", () => {
   beforeEach(async () => {
     await sthis.start();
     imagefiles = await buildBlobFiles();
-    db = lucix("lucix-with-images");
+    db = fireproof("fireproof-with-images");
     const doc = {
       _id: "images-main",
       type: "files",
@@ -542,7 +542,7 @@ describe("ledger with files input", () => {
 
     expect(file.type).toBe(imagefiles[0].file.type);
     expect(file.size).toBe(imagefiles[0].file.size);
-    // expect(file.name).toBe('image.jpg') // see https://github.com/lucix-storage/lucix/issues/70
+    // expect(file.name).toBe('image.jpg') // see https://github.com/fireproof-storage/fireproof/issues/70
 
     fileMeta = files[keys[1]] as DocFileMeta;
     expect(fileMeta.type).toBe(imagefiles[1].file.type);
@@ -553,7 +553,7 @@ describe("ledger with files input", () => {
 
     expect(file.type).toBe(imagefiles[1].file.type);
     expect(file.size).toBe(imagefiles[1].file.size);
-    // expect(file.name).toBe('lucix.png') // see https://github.com/lucix-storage/lucix/issues/70
+    // expect(file.name).toBe('fireproof.png') // see https://github.com/fireproof-storage/fireproof/issues/70
   });
 
   it("should preserve lastModified timestamp", async () => {
@@ -773,7 +773,7 @@ describe("StoreURIRuntime", () => {
     const gw = bs.defaultGatewayFactoryItem();
     expect(gw.defaultURI(sthis).toString()).toBe(
       "murks://fp",
-      // `file://${sthis.env.get("HOME")}/.lucix/${FILESTORE_VERSION.replace(/-.*$/, "")}`,
+      // `file://${sthis.env.get("HOME")}/.fireproof/${FILESTORE_VERSION.replace(/-.*$/, "")}`,
     );
   });
 });

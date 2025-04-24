@@ -9,21 +9,21 @@ cp -pr * $tmpDir
 cd $tmpDir
 cp $projectRoot/dist/npmrc-smoke .npmrc
 rm -rf pnpm-lock.yaml node_modules
-#fp_core=$(echo $smokeDir/../../dist/lucix-core/lucix-core-*.tgz)
-#use_fp=$(echo $smokeDir/../../dist/use-lucix/use-lucix-*.tgz)
-#sed -e "s|LUCIX_CORE|file://$fp_core|g" \
-#    -e "s|USE_LUCIX|file://$use_fp|g" package-template.json > package.json
+#fp_core=$(echo $smokeDir/../../dist/fireproof-core/fireproof-core-*.tgz)
+#use_fp=$(echo $smokeDir/../../dist/use-fireproof/use-fireproof-*.tgz)
+#sed -e "s|FIREPROOF_CORE|file://$fp_core|g" \
+#    -e "s|USE_FIREPROOF|file://$use_fp|g" package-template.json > package.json
 cp package-template.json package.json
 #ls -la .npmrc
 #cat package.json
 #env | sort > $projectRoot/dist/smoke.react.env
 unset npm_config_registry
 # pnpm install
-pnpm install use-lucix@$(cat $projectRoot/dist/fp-version)
+pnpm install use-fireproof@$(cat $projectRoot/dist/fp-version)
 pnpm why react
 cat package.json
-# pnpm install -f "file://$smokeDir/../../dist/lucix-core/lucix-core-*.tgz"
-# pnpm install -f "file://$smokeDir/../../dist/use-lucix/use-lucix-*.tgz"
+# pnpm install -f "file://$smokeDir/../../dist/fireproof-core/fireproof-core-*.tgz"
+# pnpm install -f "file://$smokeDir/../../dist/use-fireproof/use-fireproof-*.tgz"
 # pnpm run test > /dev/null 2>&1 || true
 pnpm run test
 if [ -z "$NO_CLEANUP" ]

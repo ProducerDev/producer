@@ -1,12 +1,12 @@
-import { DocWithId, useLucix, toCloud, WebToCloudCtx, WebCtx } from "use-lucix";
+import { DocWithId, useFireproof, toCloud, WebToCloudCtx, WebCtx } from "use-fireproof";
 import { useState, useEffect } from "react";
 import "./App.css";
 // import { URI } from "@adviser/cement";
 
 function App() {
-  const { database, attach } = useLucix("lucix-4-party", {
+  const { database, attach } = useFireproof("fireproof-4-party", {
     attach: toCloud({
-      urls: { base: "fpcloud://lucix-v2-cloud-dev.jchris.workers.dev" },
+      urls: { base: "fpcloud://fireproof-v2-cloud-dev.jchris.workers.dev" },
       tenant: "3rd-party",
       ledger: "have-four-drinks",
     }),

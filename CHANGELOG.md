@@ -15,7 +15,7 @@ What are the breaking changes in the 0.20 series?
 - a new memory implementation is replacing the memfs implementation.
   The prev use was to add to file:// the parameter fs=memfs now just use
   memory:// works for Ledger as KeyBags.
-- The opts parameter of lucix changed so that it's now possible
+- The opts parameter of fireproof changed so that it's now possible
   to specify a every persitence like data/file/meta/wal or index-data/index-file/index-meta/index-wal a own URL. In the internals we also
   prevents the multiple instanciation of Gateways and Stores with results
   in better performance and less memory. This is a breaking change.

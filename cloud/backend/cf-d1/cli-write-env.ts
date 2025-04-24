@@ -1,5 +1,5 @@
 import { command, option, string, flag, optional, array, multioption } from "cmd-ts";
-import { rt, SuperThis } from "@lucix/core";
+import { rt, SuperThis } from "@fireproof/core";
 import { param } from "@adviser/cement";
 import fs from "fs/promises";
 

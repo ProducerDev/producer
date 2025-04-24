@@ -1,18 +1,18 @@
 
 GIT=$(git rev-parse HEAD)
-rm -rf ./dist/lucix-docs
-git clone $(pwd)/.git -b docs ./dist/lucix-docs
-cp .git/config ./dist/lucix-docs/.git/
+rm -rf ./dist/fireproof-docs
+git clone $(pwd)/.git -b docs ./dist/fireproof-docs
+cp .git/config ./dist/fireproof-docs/.git/
 (
-  cd ./dist/lucix-docs &&
+  cd ./dist/fireproof-docs &&
   git config advice.addIgnoredFile false &&
   git pull origin docs &&
   git rm -rf docs
 )
-mkdir -p dist/lucix-docs/docs
-npx typedoc --out dist/lucix-docs/docs  src/ledger.ts
+mkdir -p dist/fireproof-docs/docs
+npx typedoc --out dist/fireproof-docs/docs  src/ledger.ts
 
-cd ./dist/lucix-docs
+cd ./dist/fireproof-docs
 git add docs
 if [ -z $GITHUB_REF ]
 then

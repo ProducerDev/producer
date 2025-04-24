@@ -14,7 +14,7 @@ unset npm_config_registry
 FP_VERSION=$(node $projectRoot/smoke/get-fp-version.js)
 echo $FP_VERSION > $projectRoot/dist/fp-version
 
-for packageDir in $projectRoot/dist/use-lucix $projectRoot/dist/lucix-core
+for packageDir in $projectRoot/dist/use-fireproof $projectRoot/dist/fireproof-core
 do
   smokeDir=$projectRoot/dist/smoke/$(basename $packageDir)
   rm -rf $smokeDir
@@ -29,5 +29,5 @@ do
      pnpm publish --registry=http://localhost:4873 --no-git-checks)
 done
 
-curl -L "http://localhost:4874/@lucix/core@$(cat $projectRoot/dist/fp-version)" > /dev/null &
+curl -L "http://localhost:4874/@fireproof/core@$(cat $projectRoot/dist/fp-version)" > /dev/null &
 

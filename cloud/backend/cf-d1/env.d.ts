@@ -16,7 +16,7 @@ export interface Env {
   BUCKET_NAME: string;
   CLOUDFLARE_API_TOKEN: string;
   EMAIL: string;
-  LUCIX_SERVICE_PRIVATE_KEY: string;
+  FIREPROOF_SERVICE_PRIVATE_KEY: string;
   POSTMARK_TOKEN: string;
   SECRET_ACCESS_KEY: string;
   SERVICE_ID: string;

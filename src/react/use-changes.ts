@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { ChangesOptions, ClockHead, DocTypes, DocWithId, Database } from "@lucix/core";
+import type { ChangesOptions, ClockHead, DocTypes, DocWithId, Database } from "@fireproof/core";
 import type { ChangesResult } from "./types.js";
 
 /**

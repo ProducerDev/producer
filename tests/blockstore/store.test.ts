@@ -1,5 +1,5 @@
 import { CID } from "multiformats";
-import { rt, bs, NotFoundError, PARAM, ensureSuperThis } from "@lucix/core";
+import { rt, bs, NotFoundError, PARAM, ensureSuperThis } from "@fireproof/core";
 import { Result } from "@adviser/cement";
 import { mockLoader, noopUrl } from "../helpers.js";
 

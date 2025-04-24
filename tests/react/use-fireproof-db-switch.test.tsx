@@ -1,20 +1,20 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { lucix, useLucix } from "use-lucix";
-import type { Database, LiveQueryResult } from "use-lucix";
+import { fireproof, useFireproof } from "use-fireproof";
+import type { Database, LiveQueryResult } from "use-fireproof";
 
 // Test timeout value for CI
 const TEST_TIMEOUT = 45000;
 
-describe("HOOK: useLucix database switching", () => {
+describe("HOOK: useFireproof database switching", () => {
   const db1Name = "db1";
   const db2Name = "db2";
   let db1: Database, db2: Database;
 
   beforeEach(async () => {
     // Setup two databases with different data
-    db1 = lucix(db1Name);
-    db2 = lucix(db2Name);
+    db1 = fireproof(db1Name);
+    db2 = fireproof(db2Name);
 
     // Add data to db1
     await db1.put({ foo: "db1-data" });
@@ -33,7 +33,7 @@ describe("HOOK: useLucix database switching", () => {
       // Initial render with db1
       const { rerender } = renderHook(
         ({ dbName }) => {
-          const result = useLucix(dbName);
+          const result = useFireproof(dbName);
           currentDbName = result.database.name;
           currentDb = result.database;
           query = result.useLiveQuery<{ foo: string }>("foo");

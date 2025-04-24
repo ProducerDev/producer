@@ -11,8 +11,8 @@ import {
   LedgerOpts,
   Database,
   CRDTImpl,
-  lucix,
-} from "@lucix/core";
+  fireproof,
+} from "@fireproof/core";
 
 interface TestType {
   readonly title: string;
@@ -32,7 +32,7 @@ describe("basic Index", () => {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     await db.put({ title: "amazing" });
     await db.put({ title: "creative" });
     await db.put({ title: "bazillas" });
@@ -119,7 +119,7 @@ describe("Index query with compound key", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     await db.put({ title: "amazing", score: 1 });
     await db.put({ title: "creative", score: 2 });
     await db.put({ title: "creative", score: 20 });
@@ -149,7 +149,7 @@ describe("basic Index with map fun", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     await db.put({ title: "amazing" });
     await db.put({ title: "creative" });
     await db.put({ title: "bazillas" });
@@ -177,7 +177,7 @@ describe("basic Index with map fun with value", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     await db.put({ title: "amazing" });
     await db.put({ title: "creative" });
     await db.put({ title: "bazillas" });
@@ -217,7 +217,7 @@ describe("Index query with map and compound key", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     await db.put({ title: "amazing", score: 1 });
     await db.put({ title: "creative", score: 2 });
     await db.put({ title: "creative", score: 20 });
@@ -247,7 +247,7 @@ describe("basic Index with string fun", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     await db.put({ title: "amazing" });
     await db.put({ title: "creative" });
     await db.put({ title: "bazillas" });
@@ -279,7 +279,7 @@ describe("basic Index with string fun and numeric keys", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     await db.put({ points: 0 });
     await db.put({ points: 1 });
     await db.put({ points: 2 });
@@ -422,7 +422,7 @@ describe("basic Index with no data", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = lucix("test-indexer");
+    db = fireproof("test-indexer");
     indexer = new Index<string, TestType>(sthis, db.ledger.crdt, "hello", (doc) => {
       didMap = true;
       return doc.title;

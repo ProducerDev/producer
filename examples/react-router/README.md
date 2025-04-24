@@ -1,6 +1,6 @@
-# React Router Example with Lucix
+# React Router Example with Fireproof
 
-A bare-bones `react-router` example built using [bolt.new](https://bolt.new) and powered by [Lucix](https://lucix.storage).
+A bare-bones `react-router` example built using [bolt.new](https://bolt.new) and powered by [Fireproof](https://fireproof.storage).
 
 ## Live Demo
 

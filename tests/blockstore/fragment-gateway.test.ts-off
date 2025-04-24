@@ -1,5 +1,5 @@
 import { Result, URI } from "@adviser/cement";
-import { bs, ensureSuperThis } from "@lucix/core";
+import { bs, ensureSuperThis } from "@fireproof/core";
 
 class TraceGateway implements bs.Gateway {
   readonly buildUrlFn = vitest.fn();

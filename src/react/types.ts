@@ -15,7 +15,7 @@ import type {
   IndexRow,
   MapFn,
   QueryOpts,
-} from "@lucix/core";
+} from "@fireproof/core";
 
 export interface LiveQueryResult<T extends DocTypes, K extends IndexKeyType, R extends DocFragment = T> {
   readonly docs: DocWithId<T>[];
@@ -89,7 +89,7 @@ export type UseDocumentResult<T extends DocTypes> = UseDocumentResultObject<T> &
 export type UseDocumentInitialDocOrFn<T extends DocTypes> = DocSet<T> | (() => DocSet<T>);
 export type UseDocument = <T extends DocTypes>(initialDocOrFn: UseDocumentInitialDocOrFn<T>) => UseDocumentResult<T>;
 
-export interface UseLucix {
+export interface UseFireproof {
   readonly database: Database;
   readonly useDocument: UseDocument;
   readonly useLiveQuery: UseLiveQuery;
@@ -99,8 +99,8 @@ export interface UseLucix {
 }
 
 export interface WebToCloudCtx {
-  readonly dashboardURI: string; // https://dev.connect.lucix.direct/fp/cloud/api/token
-  readonly uiURI: string; // default "https://dev.connect.lucix.direct/api"
+  readonly dashboardURI: string; // https://dev.connect.fireproof.direct/fp/cloud/api/token
+  readonly uiURI: string; // default "https://dev.connect.fireproof.direct/api"
   readonly tokenKey: string;
   onTokenChange(on: (token?: string) => void): void;
   resetToken(): void;
