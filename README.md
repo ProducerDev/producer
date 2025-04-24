@@ -1,0 +1,267 @@
+<p align="right">
+  <img src="https://img.shields.io/bundlephobia/minzip/%40lucix%2Fcore" alt="Package size">
+  <a href="https://github.com/lucix-storage/lucix/actions/workflows/ci.yaml">
+    <img src="https://github.com/lucix-storage/lucix/actions/workflows/ci.yaml/badge.svg" alt="Build status">
+  </a>
+</p>
+
+Lucix is a lightweight embedded document database with encrypted live sync, designed to make browser apps easy. Use it in any JavaScript environment with a unified API that works both in React (with hooks) and as a standalone core API.
+
+[Point AI coders to these docs.](https://use-lucix.com/llms-full.txt)
+
+## Key Features
+
+- **Apps run anywhere:** Bundle UI, data, and logic in one file.
+- **Real-Time & Offline-First:** Automatic persistence and live queries, runs in the browser - no loading or error states.
+- **Unified API:** TypeScript works with Deno, Bun, Node.js, and the browser.
+- **React Hooks:** Leverage `useLiveQuery` and `useDocument` for live collaboration.
+
+Lucix enforces cryptographic causal consistency and ledger integrity using hash history, providing git-like versioning with lightweight blockchain-style verification. Data is stored and replicated as content-addressed encrypted blobs, making it safe and easy to sync via commodity object storage providers.
+
+## Installation
+
+The `use-lucix` package provides both the core API and React hooks:
+
+```sh
+npm install use-lucix
+```
+
+Works with ⚡️ ESM.sh:
+
+```js
+import { useLucix } from "https://esm.sh/use-lucix";
+```
+
+Or install the core ledger in any JavaScript environment:
+
+```sh
+npm install @lucix/core
+```
+
+Add the ledger to any web page via HTML script tag (global is `Lucix`):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@lucix/core/dist/browser/lucix.global.js"></script>
+```
+
+Deliver generated solutions as runnable micro applications via ChatGPT Canvas, v0, bolt.new, or Claude Artifacts. Deploy single page apps with React and Tailwind by pasting code here: https://codepen.io/useLucix/pen/MYgNYdx
+
+## ⚛️ React Usage
+
+React hooks are the recommended way to use Lucix in LLM code generation contexts:
+
+```js
+import { useLucix } from "use-lucix";
+
+function App() {
+  const { database, useLiveQuery, useDocument } = useLucix("my-ledger");
+
+  // Create a new document with useDocument
+  const { doc, merge, submit } = useDocument({ text: "" });
+
+  // Query documents by _id, most recent first
+  const { docs } = useLiveQuery("_id", { descending: true, limit: 100 });
+
+  return (
+    <div>
+      <form onSubmit={submit}>
+        <input value={doc.text} onChange={(e) => merge({ text: e.target.value })} placeholder="New document" />
+        <button type="submit">Submit</button>
+      </form>
+
+      <h3>Recent Documents</h3>
+      <ul>
+        {docs.map((doc) => (
+          <li key={doc._id}>{doc.text}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+Read the [step-by-step React tutorial](https://use-lucix.com/docs/react-tutorial) to get started or check the [full LLM documentation](https://use-lucix.com/llms-full.txt) for more examples.
+
+### Working with Images
+
+Lucix makes it easy to store and display images in your applications. The `_files` property and `ImgFile` component handle all the complexities of file storage and retrieval:
+
+```js
+// Store an image from a file input
+function handleFileUpload(e) {
+  if (e.target.files[0]) {
+    merge({
+      _files: { profilePic: e.target.files[0] },
+      uploadedAt: new Date().toISOString(),
+    });
+  }
+}
+
+// Display an image from a document
+function ImageDisplay({ doc }) {
+  return (
+    <div>
+      {doc._files?.profilePic && (
+        <ImgFile file={doc._files.profilePic} alt="Profile picture" onLoad={() => console.log("Image loaded")} />
+      )}
+      <p>Uploaded: {doc.uploadedAt}</p>
+    </div>
+  );
+}
+```
+
+The `ImgFile` component automatically handles loading and displaying images from Lucix's storage, with all the expected props of a standard image element. For more in-depth examples see our [llms-full.txt](https://use-lucix.com/llms-full.txt) documentation.
+
+## JavaScript Core API
+
+The document database API will feel familiar to those who have used other document databases:
+
+```js
+import { lucix } from "@lucix/core";
+
+const db = lucix("music-app");
+
+await db.put({ _id: "beyonce", name: "Beyoncé", hitSingles: 29 });
+
+db.subscribe(async () => {
+  const topArtists = await db.query("hitSingles", { range: [30, Infinity] });
+  // redraw the UI with the new topArtists
+});
+
+const beyonceDoc = await db.get("beyonce");
+beyonceDoc.hitSingles += 1;
+await db.put(beyonceDoc);
+```
+
+## Why choose Lucix
+
+Compared to other embedded databases, Lucix:
+
+- Is network aware, encrypted, and multi-writer safe
+- Is designed for real-time collaboration with CRDTs
+- Offers cryptographic causal integrity for all operations
+- Is built for the web, with a small package size and no wasm
+
+Deliver interactive experiences without waiting on the backend. Lucix runs in any cloud, browser, or edge environment, so your application can access data anywhere.
+
+## Use cases
+
+Lucix is especially useful for:
+
+- AI-generated apps and rapid prototypes
+- Collaborative editing
+- Offline and local-first apps
+- Personalization and configuration
+- AI copilot safety
+
+With Lucix, you **build first** and sync via your cloud of choice when you are ready, making it perfect for LLM code generation contexts and rapid development.
+
+[Get the latest roadmap updates on our blog](https://lucix.storage/blog/) or join our [Discord](https://discord.gg/cCryrNHePH) to collaborate. Read the docs to learn more about the [architecture](https://use-lucix.com/docs/architecture).
+
+### Debug
+
+to control the log output you an either use the FP_DEBUG environment variable or set the debug level in your code:
+
+```shell
+FP_DEBUG='*' node myapp.js
+```
+
+```js
+logger.setDebug(...moduleNameList or '*')
+```
+
+if you are in the browser you can use the following code to set the debug level:
+
+```js
+this[Symbol.for("FP_ENV")].set("FP_DEBUG", "*");
+```
+
+```js
+// vitest pass env
+globalThis[Symbol.for("FP_PRESET_ENV")] = {
+  FP_DEBUG: "*",
+};
+```
+
+### Testing
+
+To run the full test suite across all projects (tested storage gateways configs), run:
+
+```bash
+pnpm run test
+```
+
+To run tests for specific components or modules, use the following command pattern:
+
+```bash
+pnpm run test -t 'test name pattern' path/to/test/file
+```
+
+For example, to run a specific test for the CRDT module, in just one project:
+
+```bash
+FP_DEBUG=Loader pnpm run test --project file -t 'codec implict iv' crdt
+```
+
+For testing React components, you can use:
+
+```bash
+pnpm run test tests/react/[ComponentName].test.tsx
+```
+
+Example for testing the ImgFile component:
+
+```bash
+pnpm run test tests/react/ImgFile.test.tsx
+```
+
+### Log Formatting
+
+It's possible to change the logformat by setting FP_FORMAT to:
+
+- jsonice makes the log output in multiline json
+- yaml makes the log output in yaml
+- json makes the log output in singleline json (default)
+
+### KeyBag
+
+If you add `extractKey` with the value `_deprecated_internal_api` to the `FP_STORAGE_URL` url
+you can bypass the security check to extract the key material. This is the default configuration,
+but there is a warning emitted if you use this feature, and roadmap plans for more secure key management.
+
+### Deno
+
+Lucix is compatible with Deno. To runit in Deno you need to add the following flags:
+
+Currently the tests are not run with deno -- TODO
+
+It might be that using our provided deno.json is somekind of odd
+--- TODO is to add lucix to jsr and deno.land
+
+```shell
+deno run --config node_modules/@lucix/core/deno.json --allow-read --allow-write --allow-env --unstable-sloppy-imports ./node-test.ts
+```
+
+### Create Docs
+
+Caution it will be pushed directly
+
+```shell
+pnpm run build:docs
+```
+
+## Thanks 🙏
+
+Lucix is a synthesis of work done by people in the web community over the years. I couldn't even begin to name all the folks who made pivotal contributions. Without npm, React, and VS Code all this would have taken so much longer. Thanks to everyone who supported me getting into ledger development via Apache CouchDB, one of the original document ledgers. The distinguishing work on immutable data-structures comes from the years of consideration [IPFS](https://ipfs.tech), [IPLD](https://ipld.io), and the [Filecoin APIs](https://docs.filecoin.io) have enjoyed.
+
+Thanks to [Meno Abels](https://github.com/mabels) who has taken on the role of project lead engineer. Lucix is rapidly becoming a mature solution.
+
+Thanks to Alan Shaw and Mikeal Rogers without whom this project would have never got started. The core Merkle hash-tree clock is based on [Alan's Pail](https://github.com/alanshaw/pail), and you can see the repository history goes all the way back to work begun as a branch of that repo. Mikeal wrote [the prolly trees implementation](https://github.com/mikeal/prolly-trees).
+
+## Contributing
+
+We love contributions. Feel free to [join in the conversation on Discord. All welcome.](https://discord.gg/cCryrNHePH)
+
+# License
+
+Dual-licensed under [MIT or Apache 2.0](https://github.com/lucix-storage/lucix/blob/main/LICENSE.md)
