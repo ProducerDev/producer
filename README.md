@@ -1,10 +1,3 @@
-<p align="right">
-  <img src="https://img.shields.io/bundlephobia/minzip/%40lucix%2Fcore" alt="Package size">
-  <a href="https://github.com/lucix-storage/lucix/actions/workflows/ci.yaml">
-    <img src="https://github.com/lucix-storage/lucix/actions/workflows/ci.yaml/badge.svg" alt="Build status">
-  </a>
-</p>
-
 Lucix is a lightweight embedded document database with encrypted live sync, designed to make browser apps easy. Use it in any JavaScript environment with a unified API that works both in React (with hooks) and as a standalone core API.
 
 [Point AI coders to these docs.](https://use-lucix.com/llms-full.txt)
