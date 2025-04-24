@@ -64,7 +64,7 @@ export const PARAM = {
   CAR_CACHE_SIZE: "carCacheSize",
   CAR_COMPACT_CACHE_SIZE: "carCompactCacheSize",
   CAR_META_CACHE_SIZE: "carMetaCacheSize",
-  GENESIS_CID: "baembeiarootfireproofgenesisblockaaaafireproofgenesisblocka",
+  GENESIS_CID: "baembeiarootlucixgenesisblockaaaalucixgenesisblocka",
   LOCAL_NAME: "localName",
   // FS = "fs",
 };

@@ -2,7 +2,7 @@ import { openDB, IDBPDatabase } from "idb";
 import { exception2Result, KeyedResolvOnce, Result, URI } from "@adviser/cement";
 
 import { INDEXEDDB_VERSION } from "../indexeddb-version.js";
-import { NotFoundError, PARAM, exceptionWrapper, getKey, getStore, type SuperThis, bs } from "@fireproof/core";
+import { NotFoundError, PARAM, exceptionWrapper, getKey, getStore, type SuperThis, bs } from "@lucix/core";
 
 function ensureVersion(url: URI): URI {
   return url.build().defParam(PARAM.VERSION, INDEXEDDB_VERSION).URI();

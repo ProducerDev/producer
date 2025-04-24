@@ -8,7 +8,7 @@ async function analyzeProject() {
   const buildConfigs = createBuildSettings({ minify: false, metafile: true });
 
   for (const config of buildConfigs) {
-    if (!/fireproof\.iife/.test(config.outfile)) continue;
+    if (!/lucix\.iife/.test(config.outfile)) continue;
     try {
       const result = await esbuild.build(config);
 

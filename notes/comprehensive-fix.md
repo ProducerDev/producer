@@ -2,7 +2,7 @@
 
 ## Background
 
-The React Hooks implementation in Fireproof violates the Rules of Hooks because hook implementation functions are created during render, breaking stable hook identity. This causes test failures and potential race conditions with async operations in the returned handler functions.
+The React Hooks implementation in Lucix violates the Rules of Hooks because hook implementation functions are created during render, breaking stable hook identity. This causes test failures and potential race conditions with async operations in the returned handler functions.
 
 ## Objectives
 
@@ -17,18 +17,18 @@ The React Hooks implementation in Fireproof violates the Rules of Hooks because 
 ## Architecture Overview
 
 1. **Module-Level Hook Implementations**:
-   - `useFireproofDocument<T>(database, initialDoc)`
-   - `useFireproofQuery<T>(database, mapFn, query, initialRows)`
+   - `useLucixDocument<T>(database, initialDoc)`
+   - `useLucixQuery<T>(database, mapFn, query, initialRows)`
 2. **Hook Factory**:
-   - `createFireproofHooks(database)` returns `{ useDocument, useLiveQuery, ... }`
+   - `createLucixHooks(database)` returns `{ useDocument, useLiveQuery, ... }`
 3. **Maintaining Existing API**:
    - All current exports will be preserved for backward compatibility
    - `createUseDocument`, `createUseLiveQuery`, etc. remain unchanged from a consumer perspective
 4. **New Public API Hook** (additive, not replacing):
    ```ts
-   export function useFireproof(name = "default", config = {}) {
-     const database = useFireproofDatabase(name, config);
-     const hooks = useMemo(() => createFireproofHooks(database), [database]);
+   export function useLucix(name = "default", config = {}) {
+     const database = useLucixDatabase(name, config);
+     const hooks = useMemo(() => createLucixHooks(database), [database]);
      return { database, ...hooks };
    }
    ```
@@ -38,21 +38,21 @@ The React Hooks implementation in Fireproof violates the Rules of Hooks because 
 
 ### Phase 1: Core Refactor (Maintaining API Compatibility)
 
-1. Extract `useFireproofDocument` from current `createUseDocument` into its own file.
-2. Change `createUseDocument` to a thin wrapper that calls `useFireproofDocument(database, initialDoc)`, ensuring it returns exactly the same API shape.
-3. Ensure all hook calls are at the top level of `useFireproofDocument`.
+1. Extract `useLucixDocument` from current `createUseDocument` into its own file.
+2. Change `createUseDocument` to a thin wrapper that calls `useLucixDocument(database, initialDoc)`, ensuring it returns exactly the same API shape.
+3. Ensure all hook calls are at the top level of `useLucixDocument`.
 4. Verify that all existing exports maintain the same signatures and behavior.
 
 ### Phase 2: Hook Factory & Public API (Additive Only)
 
-1. Implement `createFireproofHooks(database)` in module scope.
-2. Create `useFireproof` as an additional API option, not replacing existing patterns.
+1. Implement `createLucixHooks(database)` in module scope.
+2. Create `useLucix` as an additional API option, not replacing existing patterns.
 3. Ensure all existing API entry points remain fully functional.
 
 ### Phase 3: Tests & Compatibility
 
 1. Audit existing tests to ensure they still work with existing imports.
-2. Add new tests for the additional `useFireproof` API while maintaining original tests.
+2. Add new tests for the additional `useLucix` API while maintaining original tests.
 3. Run tests and fix any failures, ensuring backward compatibility.
 4. Verify the public API by testing actual consumer use cases where possible.
 

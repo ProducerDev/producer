@@ -1,5 +1,5 @@
 import { URI } from "@adviser/cement";
-import { rt, bs, fireproof, PARAM, ensureSuperThis, Database } from "@fireproof/core";
+import { rt, bs, lucix, PARAM, ensureSuperThis, Database } from "@lucix/core";
 
 describe("MetaKeyHack", () => {
   const storageMap = new Map();
@@ -17,7 +17,7 @@ describe("MetaKeyHack", () => {
   let db: Database;
   let ctx: { loader: bs.Loadable };
   beforeAll(async () => {
-    db = fireproof("test", {
+    db = lucix("test", {
       storeUrls: {
         base: "hack://localhost",
       },

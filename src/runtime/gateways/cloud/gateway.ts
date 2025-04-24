@@ -503,17 +503,17 @@ interface Subscription {
 
 const subscriptions = new Map<string, Subscription[]>();
 // const doServerSubscribe = new KeyedResolvOnce();
-export class FireproofCloudGateway implements SerdeGateway {
+export class LucixCloudGateway implements SerdeGateway {
   readonly logger: Logger;
   readonly sthis: SuperThis;
   readonly #connectionURIs = new KeyedResolvOnce<ConnectionItem>();
 
   constructor(sthis: SuperThis) {
     this.sthis = sthis;
-    this.logger = ensureLogger(sthis, "FireproofCloudGateway", {
+    this.logger = ensureLogger(sthis, "LucixCloudGateway", {
       this: true,
     });
-    // console.log("FireproofCloudGateway", this.sthis.nextId().str);
+    // console.log("LucixCloudGateway", this.sthis.nextId().str);
   }
 
   async buildUrl(ctx: SerdeGatewayCtx, baseUrl: URI, key: string): Promise<Result<URI>> {
@@ -592,7 +592,7 @@ export class FireproofCloudGateway implements SerdeGateway {
     return Result.Ok(undefined);
   }
 
-  // fireproof://localhost:1999/?name=test-public-api&protocol=ws&store=meta
+  // lucix://localhost:1999/?name=test-public-api&protocol=ws&store=meta
   // async getCloudConnection(uri: URI): Promise<Result<MsgConnectedAuth>> {
   //   return this.getCloudConnectionItem(uri).then((r) => {
   //     return r.conn;
@@ -756,28 +756,28 @@ export class FireproofCloudGateway implements SerdeGateway {
   }
 }
 
-const onceRegisterFireproofCloudStoreProtocol = new KeyedResolvOnce<() => void>();
-export function registerFireproofCloudStoreProtocol(protocol = "fpcloud:") {
-  return onceRegisterFireproofCloudStoreProtocol.get(protocol).once(() => {
+const onceRegisterLucixCloudStoreProtocol = new KeyedResolvOnce<() => void>();
+export function registerLucixCloudStoreProtocol(protocol = "fpcloud:") {
+  return onceRegisterLucixCloudStoreProtocol.get(protocol).once(() => {
     URI.protocolHasHostpart(protocol);
     return registerStoreProtocol({
       protocol,
       defaultURI() {
-        return URI.from("fpcloud://fireproof.cloud/");
+        return URI.from("fpcloud://lucix.cloud/");
       },
       serdegateway: async (sthis: SuperThis) => {
-        return new FireproofCloudGateway(sthis);
+        return new LucixCloudGateway(sthis);
       },
     });
   });
 }
 
-registerFireproofCloudStoreProtocol();
+registerLucixCloudStoreProtocol();
 
 // export function toCloud(url: CoerceURI): Attachable {
 //   const urlObj = URI.from(url);
 //   if (urlObj.protocol !== "fpcloud:") {
-//     throw new Error("url must have fireproof protocol");
+//     throw new Error("url must have lucix protocol");
 //   }
 //   // const existingName = urlObj.getParam("name");
 //   // urlObj.defParam("name", remoteDbName || existingName || dbName);

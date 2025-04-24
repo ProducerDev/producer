@@ -54,7 +54,7 @@ function getGenerateIVFn(url: URI, opts: Partial<CodecOpts>): GenerateIVFn {
 
 export class BlockIvKeyIdCodec implements AsyncBlockCodec<24, Uint8Array, IvKeyIdData> {
   readonly code = 24;
-  readonly name = "Fireproof@encrypted-block:aes-gcm";
+  readonly name = "Lucix@encrypted-block:aes-gcm";
 
   readonly ko: CryptoAction;
   readonly iv?: Uint8Array;
@@ -163,7 +163,7 @@ class cryptoAction implements CryptoAction {
 
 class nullCodec implements AsyncBlockCodec<24, Uint8Array, IvKeyIdData> {
   readonly code = 24;
-  readonly name = "Fireproof@unencrypted-block";
+  readonly name = "Lucix@unencrypted-block";
   readonly empty = new Uint8Array();
 
   async encode(data: Uint8Array): Promise<Uint8Array> {
@@ -181,7 +181,7 @@ class nullCodec implements AsyncBlockCodec<24, Uint8Array, IvKeyIdData> {
 class noCrypto implements CryptoAction {
   readonly ivLength = 0;
   readonly code = 0x0;
-  readonly name = "Fireproof@unencrypted-block";
+  readonly name = "Lucix@unencrypted-block";
   readonly logger: Logger;
   readonly crypto: CryptoRuntime;
   readonly key: KeysByFingerprint;

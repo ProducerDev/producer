@@ -7,7 +7,7 @@ import { Hono } from "hono";
 import { Env } from "./env.js";
 import { CFExposeCtx, CFHonoFactory, getRoomDurableObject } from "./cf-hono-server.js";
 import { WSMessageReceive } from "hono/ws";
-import { ensureSuperThis } from "@fireproof/core";
+import { ensureSuperThis } from "@lucix/core";
 import { BuildURI, LoggerImpl } from "@adviser/cement";
 // import { ExportedHandler, WebSocket } from "@cloudflare/workers-types";
 
@@ -18,7 +18,7 @@ export default {
 } satisfies ExportedHandler<Env>;
 /*
   async fetch(req, env, _ctx): Promise<Response> {
-    const id = env.FP_META_GROUPS.idFromName("fireproof");
+    const id = env.FP_META_GROUPS.idFromName("lucix");
     const stub = env.FP_META_GROUPS.get(id);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return stub.fetch(req as any) as unknown as Promise<Response>;

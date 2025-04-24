@@ -1,5 +1,5 @@
 import { runtimeFn, URI } from "@adviser/cement";
-import { rt, getStore, inplaceFilter, ensureSuperThis, ensureSuperLog } from "@fireproof/core";
+import { rt, getStore, inplaceFilter, ensureSuperThis, ensureSuperLog } from "@lucix/core";
 import { UUID } from "uuidv7";
 
 describe("utils", () => {

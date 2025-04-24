@@ -1,4 +1,4 @@
-import { ps } from "@fireproof/core";
+import { ps } from "@lucix/core";
 import { MockJWK, mockJWK } from "./node/test-helper.js";
 import { Future, Result, URI } from "@adviser/cement";
 import { testSuperThis } from "../test-super-this.js";

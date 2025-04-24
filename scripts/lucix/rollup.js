@@ -9,8 +9,8 @@ import json from "@rollup/plugin-json";
 // Define absolute paths
 const projectRoot = path.resolve(process.cwd());
 console.log("projectRoot", projectRoot);
-const nodeInput = path.join(projectRoot, "dist", "tsc", "fireproof.js");
-const browserInput = path.join(projectRoot, "dist", "tsc", "fireproof.js");
+const nodeInput = path.join(projectRoot, "dist", "tsc", "lucix.js");
+const browserInput = path.join(projectRoot, "dist", "tsc", "lucix.js");
 const rollupOutput = path.join(projectRoot, "dist", "rollup");
 
 // Common plugins
@@ -35,7 +35,7 @@ export default [
     input: nodeInput,
     plugins: [...commonPlugins],
     output: {
-      file: path.join(rollupOutput, "node", "fireproof.cjs"),
+      file: path.join(rollupOutput, "node", "lucix.cjs"),
       format: "cjs",
       banner: 'console.log("Node CJS build");',
       sourcemap: true,
@@ -47,7 +47,7 @@ export default [
     input: nodeInput,
     plugins: [...commonPlugins],
     output: {
-      file: path.join(rollupOutput, "node", "fireproof.esm.js"),
+      file: path.join(rollupOutput, "node", "lucix.esm.js"),
       format: "es",
       banner: 'console.log("Node ESM build");',
       sourcemap: true,
@@ -59,9 +59,9 @@ export default [
     input: browserInput,
     plugins: [...commonPlugins, ...browserPlugins],
     output: {
-      file: path.join(rollupOutput, "browser", "fireproof.iife.js"),
+      file: path.join(rollupOutput, "browser", "lucix.iife.js"),
       format: "iife",
-      name: "Fireproof",
+      name: "Lucix",
       banner: 'console.log("Browser IIFE build");',
       sourcemap: true,
     },
@@ -72,7 +72,7 @@ export default [
     input: browserInput,
     plugins: [...commonPlugins, ...browserPlugins],
     output: {
-      file: path.join(rollupOutput, "browser", "fireproof.esm.js"),
+      file: path.join(rollupOutput, "browser", "lucix.esm.js"),
       format: "es",
       banner: 'console.log("Browser ESM build");',
       sourcemap: true,
@@ -84,7 +84,7 @@ export default [
     input: browserInput,
     plugins: [...commonPlugins, ...browserPlugins],
     output: {
-      file: path.join(rollupOutput, "browser", "fireproof.cjs"),
+      file: path.join(rollupOutput, "browser", "lucix.cjs"),
       format: "cjs",
       banner: 'console.log("Browser ESM build");',
       sourcemap: true,

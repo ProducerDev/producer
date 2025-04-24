@@ -1,5 +1,5 @@
 {
-  "name": "@fireproof-example/react",
+  "name": "@lucix-example/react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,7 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "use-fireproof": "0.0.0-smoke",
+    "use-lucix": "0.0.0-smoke",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.24.0"

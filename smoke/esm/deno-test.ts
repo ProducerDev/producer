@@ -25,11 +25,11 @@ async function getVersion() {
 }
 
 async function main() {
-  const url = `http://localhost:4874/@fireproof/core@${await getVersion()}`;
-  console.log("loading fireproof from ", url);
-  const { fireproof, PACKAGE_VERSION, rt } = await import(url);
+  const url = `http://localhost:4874/@lucix/core@${await getVersion()}`;
+  console.log("loading lucix from ", url);
+  const { lucix, PACKAGE_VERSION, rt } = await import(url);
 
-  const db = fireproof("test-node", { storageUrls: { base: "memory://xxx" } });
+  const db = lucix("test-node", { storageUrls: { base: "memory://xxx" } });
 
   // const ok =
   await db.put({ _id: "test", hello: "world" });

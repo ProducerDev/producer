@@ -1,4 +1,4 @@
-import { ps, rt } from "@fireproof/core";
+import { ps, rt } from "@lucix/core";
 import { MetaByTenantLedgerSql } from "./meta-by-tenant-ledger.js";
 import { MetaSendSql } from "./meta-send.js";
 import { TenantLedgerSql } from "./tenant-ledger.js";

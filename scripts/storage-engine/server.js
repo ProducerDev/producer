@@ -13,7 +13,7 @@ const PORT = 8000;
  * - Validate paths & mime types
  * - Authenticate requests and enforce that users can only update their own header file (userid in header filename)
  * - Deploy in a secure environment
- * To connect with a managed service, see https://fireproof.storage
+ * To connect with a managed service, see https://lucix.storage
  */
 
 const MIME_TYPES = {

@@ -16,7 +16,7 @@ import {
 import { SendOptions, WSContextInit, WSMessageReceive, WSReadyState } from "hono/ws";
 // import { RequestInfo as CFRequestInfo } from "@cloudflare/workers-types";
 // import { defaultMsgParams, jsonEnDe } from "../msger.js";
-import { ensureLogger, ensureSuperThis, SuperThis, ps, rt } from "@fireproof/core";
+import { ensureLogger, ensureSuperThis, SuperThis, ps, rt } from "@lucix/core";
 import { Env } from "./env.js";
 import { WSRoom } from "../ws-room.js";
 import { FPRoomDurableObject } from "./server.js";

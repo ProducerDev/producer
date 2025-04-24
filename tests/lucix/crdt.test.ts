@@ -11,7 +11,7 @@ import {
   DocValue,
   Index,
   index,
-} from "@fireproof/core";
+} from "@lucix/core";
 
 describe("Fresh crdt", function () {
   let crdt: CRDT;

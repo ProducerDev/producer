@@ -1,5 +1,5 @@
-import { fireproof } from "@fireproof/core";
-import { FireproofCloudGateway } from "../../src/runtime/gateways/cloud/gateway.js";
+import { lucix } from "@lucix/core";
+import { LucixCloudGateway } from "../../src/runtime/gateways/cloud/gateway.js";
 import { BuildURI, URI } from "@adviser/cement";
 import { SerdeGatewayCtx } from "../../src/blockstore/serde-gateway.js";
 import { MockJWK, mockJWK } from "./node/test-helper.js";
@@ -8,13 +8,13 @@ import { testSuperThis } from "../test-super-this.js";
 
 describe("fp-cloud", () => {
   const sthis = testSuperThis();
-  let fpgw: FireproofCloudGateway;
+  let fpgw: LucixCloudGateway;
   let auth: MockJWK;
 
   let fpGwUrl: URI;
 
   beforeAll(async () => {
-    fpgw = new FireproofCloudGateway(sthis);
+    fpgw = new LucixCloudGateway(sthis);
     auth = await mockJWK(sthis);
 
     fpGwUrl = BuildURI.from(sthis.env.get("FP_ENDPOINT"))
@@ -51,7 +51,7 @@ describe("fp-cloud", () => {
   });
 
   it("only connect once", async () => {
-    const db = fireproof(`hello:world`, {
+    const db = lucix(`hello:world`, {
       storeUrls: {
         base: "memory://connect/once",
       },

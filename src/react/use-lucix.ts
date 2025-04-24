@@ -1,35 +1,35 @@
 import { toSortedArray } from "@adviser/cement/utils";
-import { Database, fireproof } from "@fireproof/core";
+import { Database, lucix } from "@lucix/core";
 import { useMemo } from "react";
 import { useAttach } from "./use-attach.js";
-import type { UseFPConfig, UseFireproof } from "./types.js";
+import type { UseFPConfig, UseLucix } from "./types.js";
 import { createUseAllDocs } from "./use-all-docs.js";
 import { createUseChanges } from "./use-changes.js";
 import { createUseDocument } from "./use-document.js";
 import { createUseLiveQuery } from "./use-live-query.js";
 
 /**
- * @deprecated Use the `useFireproof` hook instead
+ * @deprecated Use the `useLucix` hook instead
  */
-export const FireproofCtx = {} as UseFireproof;
+export const LucixCtx = {} as UseLucix;
 
 /**
  *
  * ## Summary
  *
- * React hook to create a custom-named Fireproof database and provides the utility hooks to query against it.
+ * React hook to create a custom-named Lucix database and provides the utility hooks to query against it.
  *
  * ## Usage
  * ```tsx
- * const { database, useLiveQuery, useDocument } = useFireproof("dbname");
- * const { database, useLiveQuery, useDocument } = useFireproof("dbname", { ...options });
+ * const { database, useLiveQuery, useDocument } = useLucix("dbname");
+ * const { database, useLiveQuery, useDocument } = useLucix("dbname", { ...options });
  * ```
  *
  *
  */
-export function useFireproof(name: string | Database = "useFireproof", config: UseFPConfig = {}): UseFireproof {
+export function useLucix(name: string | Database = "useLucix", config: UseFPConfig = {}): UseLucix {
   const strConfig = JSON.stringify(toSortedArray(config));
-  const database = useMemo(() => (typeof name === "string" ? fireproof(name, config) : name), [name, strConfig]);
+  const database = useMemo(() => (typeof name === "string" ? lucix(name, config) : name), [name, strConfig]);
   const attach = useAttach(database, config);
 
   const useDocument = useMemo(() => createUseDocument(database), [database.name, strConfig]);
@@ -49,6 +49,6 @@ export type {
   UseChanges,
   UseDocument,
   UseDocumentResult,
-  UseFireproof,
+  UseLucix,
   UseLiveQuery,
 } from "./types.js";

@@ -4,14 +4,14 @@ import {
   Attachable,
   Database,
   ensureSuperThis,
-  fireproof,
+  lucix,
   GatewayUrlsParam,
   PARAM,
   rt,
   Attached,
   bs,
   sleep,
-} from "@fireproof/core";
+} from "@lucix/core";
 import { CarReader } from "@ipld/car/reader";
 import * as dagCbor from "@ipld/dag-cbor";
 import { mockLoader } from "../helpers.js";
@@ -20,7 +20,7 @@ describe("meta check", () => {
   const sthis = ensureSuperThis();
   it("empty Database", async () => {
     const name = `remote-db-${sthis.nextId().str}`;
-    const db = fireproof(name, {
+    const db = lucix(name, {
       storeUrls: {
         base: `memory://${name}`,
       },
@@ -37,7 +37,7 @@ describe("meta check", () => {
 
   it("one record Database", async () => {
     const name = `remote-db-${sthis.nextId().str}`;
-    const db = fireproof(name, {
+    const db = lucix(name, {
       storeUrls: {
         base: `memory://${name}`,
       },
@@ -45,7 +45,7 @@ describe("meta check", () => {
     await db.put({ _id: `id-${0}`, value: `value-${0}` });
     await db.close();
 
-    const db1 = fireproof(name, {
+    const db1 = lucix(name, {
       storeUrls: {
         base: `memory://${name}`,
       },
@@ -56,7 +56,7 @@ describe("meta check", () => {
   it("multiple record Database", async () => {
     const name = `remote-db-${sthis.nextId().str}`;
     const base = `memory://${name}?storekey=insecure`;
-    const db = fireproof(name, {
+    const db = lucix(name, {
       storeUrls: {
         base,
       },
@@ -99,7 +99,7 @@ describe("meta check", () => {
       },
     ]);
 
-    const db1 = fireproof(name, {
+    const db1 = lucix(name, {
       storeUrls: {
         base,
       },
@@ -137,7 +137,7 @@ describe("meta check", () => {
     }
     expect(dagCbor.decode(blocks[1].bytes)).toEqual({
       doc: {
-        _id: "baembeiarootfireproofgenesisblockaaaafireproofgenesisblocka",
+        _id: "baembeiarootlucixgenesisblockaaaalucixgenesisblocka",
       },
     });
 
@@ -286,7 +286,7 @@ describe("join function", () => {
   beforeAll(async () => {
     const set = sthis.nextId().str;
 
-    db = fireproof(`db-${set}`, {
+    db = lucix(`db-${set}`, {
       storeUrls: {
         base: `memory://db-${set}`,
       },
@@ -299,7 +299,7 @@ describe("join function", () => {
     joinableDBs = await Promise.all(
       new Array(5).fill(1).map(async (_, i) => {
         const name = `remote-db-${i}-${set}`;
-        const jdb = fireproof(name, {
+        const jdb = lucix(name, {
           storeUrls: attachableStoreUrls(name, db),
         });
         // await db.put({ _id: `genesis`, value: `genesis` });
@@ -321,7 +321,7 @@ describe("join function", () => {
   });
 
   it("it is joinable detachable", async () => {
-    const my = fireproof("my", {
+    const my = lucix("my", {
       storeUrls: {
         base: "memory://my",
       },
@@ -329,7 +329,7 @@ describe("join function", () => {
     await my.put({ _id: "genesis", value: "genesis" });
     await Promise.all(
       joinableDBs.map(async (name) => {
-        const tmp = fireproof(name, {
+        const tmp = lucix(name, {
           storeUrls: attachableStoreUrls(name, db),
         });
         const res = await tmp.allDocs();
@@ -359,7 +359,7 @@ describe("join function", () => {
 
   it("it empty inbound syncing", async () => {
     const name = `empty-db-${sthis.nextId().str}`;
-    const mydb = fireproof(name, {
+    const mydb = lucix(name, {
       storeUrls: attachableStoreUrls(name, db),
     });
     await Promise.all(
@@ -375,7 +375,7 @@ describe("join function", () => {
   });
 
   it("prepare only once", async () => {
-    const db = fireproof(`db-${sthis.nextId().str}`, {
+    const db = lucix(`db-${sthis.nextId().str}`, {
       storeUrls: {
         base: `memory://prepare`,
       },

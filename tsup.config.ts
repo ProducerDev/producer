@@ -22,11 +22,11 @@ const external = [
   "assert",
   "stream",
   "jose",
-  "@fireproof/core",
-  "@fireproof/core/node",
-  "@fireproof/core/mem",
-  "@fireproof/core/indexeddb",
-  "@fireproof/core/react",
+  "@lucix/core",
+  "@lucix/core/node",
+  "@lucix/core/mem",
+  "@lucix/core/indexeddb",
+  "@lucix/core/react",
 ];
 
 // function skipper(suffix: string[], target: string) {
@@ -34,7 +34,7 @@ const external = [
 //     const filter = new RegExp(`(${suffix.join("|")})`);
 //     build.onResolve({ filter }, async (args) => {
 //       if (target.startsWith("/")) {
-//         return build.resolve(target, { kind: args.kind, resolveDir: `/Users/menabe/Software/fproof/fireproof` });
+//         return build.resolve(target, { kind: args.kind, resolveDir: `/Users/menabe/Software/fproof/lucix` });
 //       } else {
 //         return build.resolve(target, { kind: args.kind, resolveDir: args.resolveDir });
 //       }
@@ -76,7 +76,7 @@ const external = [
 // const LIBRARY_BUNDLE_OPTIONS: Options = {
 //   format: ["esm", "cjs", "iife"],
 //   target: ["esnext", "node18"],
-//   globalName: "Fireproof",
+//   globalName: "Lucix",
 //   external,
 //   clean: true,
 //   sourcemap: true,
@@ -101,10 +101,10 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   // //   ...LIBRARY_BUNDLE_OPTIONS,
   // //   external: [...(LIBRARY_BUNDLE_OPTIONS.external || []), ...nodeInternals, ...webInternals],
   // //   format: ["iife"],
-  // //   name: "@fireproof/core",
+  // //   name: "@lucix/core",
   // //   entry: ["src/index.ts"],
   // //   platform: "browser",
-  // //   outDir: "dist/fireproof-core",
+  // //   outDir: "dist/lucix-core",
   // //   minify: true,
   // //   esbuildPlugins: [
   // //     replace({
@@ -120,16 +120,16 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   // //     }),
   // //   ],
   // //   dts: {
-  // //     footer: "declare module '@fireproof/core'",
+  // //     footer: "declare module '@lucix/core'",
   // //   },
   // // },
   // {
   //   ...LIBRARY_BUNDLE_OPTIONS,
   //   format: ["esm", "cjs"],
-  //   name: "@fireproof/core",
+  //   name: "@lucix/core",
   //   entry: ["src/index.ts"],
   //   platform: "browser",
-  //   outDir: "dist/fireproof-core",
+  //   outDir: "dist/lucix-core",
   //   external: [...(LIBRARY_BUNDLE_OPTIONS.external || []), ...nodeInternals, ...webInternals],
   //   esbuildPlugins: [
   //     replace({
@@ -143,16 +143,16 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   //     // }),
   //   ],
   //   dts: {
-  //     footer: "declare module '@fireproof/core'",
+  //     footer: "declare module '@lucix/core'",
   //   },
   // },
   // {
   //   ...LIBRARY_BUNDLE_OPTIONS,
   //   format: ["esm", "cjs"],
-  //   name: "@fireproof/core/node",
+  //   name: "@lucix/core/node",
   //   entry: ["src/runtime/gateways/file/node/index.ts"],
   //   platform: "browser",
-  //   outDir: "dist/fireproof-core/node",
+  //   outDir: "dist/lucix-core/node",
   //   esbuildPlugins: [
   //     replace({
   //       __packageVersion__: packageVersion(),
@@ -164,16 +164,16 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   //     // }),
   //   ],
   //   dts: {
-  //     footer: "declare module '@fireproof/core/node'",
+  //     footer: "declare module '@lucix/core/node'",
   //   },
   // },
   // {
   //   ...LIBRARY_BUNDLE_OPTIONS,
   //   format: ["esm"],
-  //   name: "@fireproof/core/deno",
+  //   name: "@lucix/core/deno",
   //   entry: ["src/runtime/gateways/file/deno/index.ts"],
   //   platform: "browser",
-  //   outDir: "dist/fireproof-core/deno",
+  //   outDir: "dist/lucix-core/deno",
   //   esbuildPlugins: [
   //     replace({
   //       __packageVersion__: packageVersion(),
@@ -185,16 +185,16 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   //     // }),
   //   ],
   //   dts: {
-  //     footer: "declare module '@fireproof/core/deno'",
+  //     footer: "declare module '@lucix/core/deno'",
   //   },
   // },
   // {
   //   ...LIBRARY_BUNDLE_OPTIONS,
   //   format: ["esm", "cjs"],
-  //   name: "@fireproof/core/indexeddb",
+  //   name: "@lucix/core/indexeddb",
   //   entry: ["src/runtime/gateways/indexeddb/index.ts"],
   //   platform: "browser",
-  //   outDir: "dist/fireproof-core/indexeddb",
+  //   outDir: "dist/lucix-core/indexeddb",
   //   esbuildPlugins: [
   //     replace({
   //       __packageVersion__: packageVersion(),
@@ -205,17 +205,17 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   //     // }),
   //   ],
   //   dts: {
-  //     footer: "declare module '@fireproof/core/indexeddb'",
+  //     footer: "declare module '@lucix/core/indexeddb'",
   //   },
   // },
   // {
   //   ...LIBRARY_BUNDLE_OPTIONS,
-  //   external: [...(LIBRARY_BUNDLE_OPTIONS.external || []), "@fireproof/core"],
+  //   external: [...(LIBRARY_BUNDLE_OPTIONS.external || []), "@lucix/core"],
   //   format: ["esm", "cjs"],
-  //   name: "@fireproof/core/react",
+  //   name: "@lucix/core/react",
   //   entry: ["src/react/index.ts"],
   //   platform: "browser",
-  //   outDir: "dist/fireproof-core/react",
+  //   outDir: "dist/lucix-core/react",
   //   esbuildPlugins: [
   //     replace({
   //       __packageVersion__: packageVersion(),
@@ -227,20 +227,20 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   //     // }),
   //   ],
   //   dts: {
-  //     footer: "declare module '@fireproof/core/react'",
+  //     footer: "declare module '@lucix/core/react'",
   //   },
   // },
   // {
   //   ...LIBRARY_BUNDLE_OPTIONS,
-  //   external: [...(LIBRARY_BUNDLE_OPTIONS.external || []), "@fireproof/core", "@fireproof/core/react"],
+  //   external: [...(LIBRARY_BUNDLE_OPTIONS.external || []), "@lucix/core", "@lucix/core/react"],
   //   treeshake: true,
   //   format: ["esm", "cjs"],
   //   //    minify: true,
-  //   name: "use-fireproof",
-  //   entry: ["src/use-fireproof/index.ts"],
+  //   name: "use-lucix",
+  //   entry: ["src/use-lucix/index.ts"],
   //   target: ["esnext"],
   //   platform: "browser",
-  //   outDir: "dist/use-fireproof",
+  //   outDir: "dist/use-lucix",
   //   esbuildPlugins: [
   //     replace({
   //       __packageVersion__: packageVersion(),
@@ -254,21 +254,21 @@ const LIBRARY_BUNDLES: readonly Options[] = [
   //     // }),
   //   ],
   //   dts: {
-  //     footer: "declare module 'use-fireproof'",
+  //     footer: "declare module 'use-lucix'",
   //   },
   // },
 
   {
     //    ...LIBRARY_BUNDLE_OPTIONS,
-    // external: [...external, "cmd-ts", "zx", "jose", "@fireproof/core"],
-    external: [...external, "jose", "@fireproof/core"],
+    // external: [...external, "cmd-ts", "zx", "jose", "@lucix/core"],
+    external: [...external, "jose", "@lucix/core"],
     bundle: true,
     format: ["esm"],
     target: "es2022",
     name: "fp-cli",
     entry: ["cli/main.ts"],
     platform: "node",
-    outDir: "dist/fireproof-core/cli",
+    outDir: "dist/lucix-core/cli",
     banner: {
       js: `import { createRequire } from 'module';
            const require = createRequire(import.meta.url);

@@ -1,4 +1,4 @@
-import { setPresetEnv } from "@fireproof/core";
+import { setPresetEnv } from "@lucix/core";
 
 // console.log("setup:libsql", process.env);
 setPresetEnv({

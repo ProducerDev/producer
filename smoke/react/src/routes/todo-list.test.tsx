@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import TodoList from "./Todo.js";
 
 import { expect, describe, it, beforeEach, afterEach } from "vitest";
-import { Ledger, fireproof } from "use-fireproof";
+import { Ledger, lucix } from "use-lucix";
 
 describe("<TodoList />", () => {
   let fp: Ledger;
@@ -10,7 +10,7 @@ describe("<TodoList />", () => {
     await fp.destroy();
   });
   beforeEach(async () => {
-    fp = fireproof("TodoDB");
+    fp = lucix("TodoDB");
     const all = await fp.allDocs();
     for (const doc of all.rows) {
       await fp.del(doc.key);

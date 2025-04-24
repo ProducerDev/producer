@@ -1,4 +1,4 @@
-import { SuperThis } from "@fireproof/core";
+import { SuperThis } from "@lucix/core";
 import { portRandom } from "../node/test-helper.js";
 import { $ } from "zx";
 import { Future } from "@adviser/cement";

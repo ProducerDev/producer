@@ -1,5 +1,5 @@
 import { storageURL } from "../helpers.js";
-import { docs } from "./fireproof.test.fixture.js";
+import { docs } from "./lucix.test.fixture.js";
 import { CID } from "multiformats/cid";
 
 import {
@@ -12,12 +12,12 @@ import {
   bs,
   index,
   ensureSuperThis,
-  fireproof,
+  lucix,
   Database,
   isDatabase,
   PARAM,
   sleep,
-} from "@fireproof/core";
+} from "@lucix/core";
 import { URI } from "@adviser/cement";
 
 export function carLogIncludesGroup(list: bs.AnyLink[], cid: CID) {
@@ -48,8 +48,8 @@ describe("dreamcode", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = fireproof("test-db");
-    ok = await db.put({ _id: "test-1", text: "fireproof", dream: true });
+    db = lucix("test-db");
+    ok = await db.put({ _id: "test-1", text: "lucix", dream: true });
     doc = await db.get(ok.id);
     result = await db.query("text", { range: ["a", "z"] });
   });
@@ -58,13 +58,13 @@ describe("dreamcode", function () {
     expect(ok.id).toBe("test-1");
   });
   it("should get", function () {
-    expect(doc.text).toBe("fireproof");
+    expect(doc.text).toBe("lucix");
   });
   it("should query", function () {
     expect(result).toBeTruthy();
     expect(result.rows).toBeTruthy();
     expect(result.rows.length).toBe(1);
-    expect(result.rows[0].key).toBe("fireproof");
+    expect(result.rows[0].key).toBe("lucix");
   });
   it("should query with function", async () => {
     const result = await db.query<boolean, Doc>((doc) => doc.dream);
@@ -92,7 +92,7 @@ describe("public API", function () {
 
   beforeEach(async () => {
     await sthis.start();
-    db = fireproof("test-api");
+    db = lucix("test-api");
     // index = index(db, 'test-index', (doc) => doc.foo)
     ok = await db.put({ _id: "test", foo: "bar" });
     doc = await db.get("test");
@@ -129,7 +129,7 @@ describe("database fullconfig", () => {
       path = uri.pathname;
     }
     const base = bs.getDefaultURI(sthis, protocol).build().appendRelative(path).URI();
-    const db = fireproof("my-funky-name", {
+    const db = lucix("my-funky-name", {
       storeUrls: {
         base: base,
         // meta: `${base}/meta?taste=${taste}`,
@@ -174,7 +174,7 @@ describe("basic ledger", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = fireproof("test-basic");
+    db = lucix("test-basic");
   });
   it("can put with id", async () => {
     const ok = await db.put({ _id: "test", foo: "bar" });
@@ -248,7 +248,7 @@ describe("benchmarking with compaction", function () {
   beforeEach(async () => {
     // erase the existing test data
     await sthis.start();
-    db = fireproof("test-benchmark-compaction", { autoCompact: 3 });
+    db = lucix("test-benchmark-compaction", { autoCompact: 3 });
   });
   it.skip("insert during compaction", async () => {
     const ok = await db.put({ _id: "test", foo: "fast" });
@@ -302,8 +302,8 @@ describe("benchmarking a ledger", function () {
   beforeEach(async () => {
     await sthis.start();
     // erase the existing test data
-    db = fireproof("test-benchmark", { autoCompact: 100000, public: true });
-    // db = fireproof(null, {autoCompact: 100000})
+    db = lucix("test-benchmark", { autoCompact: 100000, public: true });
+    // db = lucix(null, {autoCompact: 100000})
   });
 
   // run benchmarking tests
@@ -353,7 +353,7 @@ describe("benchmarking a ledger", function () {
     // equals(allDocsResult2.rows.length, numDocs+1)
 
     // console.time("open new DB");
-    const newDb = fireproof("test-benchmark", { autoCompact: 100000, public: true });
+    const newDb = lucix("test-benchmark", { autoCompact: 100000, public: true });
     const doc = await newDb.get<{ foo: string }>("test");
     expect(doc.foo).toBe("fast");
     // console.timeEnd("open new DB");
@@ -391,7 +391,7 @@ describe("benchmarking a ledger", function () {
     await sleep(100);
 
     // console.time("compacted reopen again");
-    const newDb2 = fireproof("test-benchmark", { autoCompact: 100000, public: true });
+    const newDb2 = lucix("test-benchmark", { autoCompact: 100000, public: true });
     const doc21 = await newDb2.get<FooType>("test");
     expect(doc21.foo).toBe("fast");
     const blocks2 = newDb2.ledger.crdt.blockstore as bs.EncryptedBlockstore;
@@ -457,7 +457,7 @@ describe("Reopening a ledger", function () {
     // erase the existing test data
     await sthis.start();
 
-    db = fireproof("test-reopen", { autoCompact: 100000 });
+    db = lucix("test-reopen", { autoCompact: 100000 });
     const ok = await db.put({ _id: "test", foo: "bar" });
     expect(ok).toBeTruthy();
     expect(ok.id).toBe("test");
@@ -472,7 +472,7 @@ describe("Reopening a ledger", function () {
   });
 
   it("should have the same data on reopen", async () => {
-    const db2 = fireproof("test-reopen");
+    const db2 = lucix("test-reopen");
     const doc = await db2.get<FooType>("test");
     expect(doc.foo).toBe("bar");
     expect(db2.ledger.crdt.clock.head).toBeDefined();
@@ -491,7 +491,7 @@ describe("Reopening a ledger", function () {
   });
 
   it("should have carlog after reopen", async () => {
-    const db2 = fireproof("test-reopen");
+    const db2 = lucix("test-reopen");
     await db2.ledger.crdt.ready();
     const blocks = db2.ledger.crdt.blockstore as bs.EncryptedBlockstore;
     const loader = blocks.loader;
@@ -504,7 +504,7 @@ describe("Reopening a ledger", function () {
   it("faster, should have the same data on reopen after reopen and update", async () => {
     for (let i = 0; i < 4; i++) {
       // console.log('iteration', i)
-      const db = fireproof("test-reopen");
+      const db = lucix("test-reopen");
       // assert(db._crdt.xready());
       await db.ready();
       const blocks = db.ledger.crdt.blockstore as bs.EncryptedBlockstore;
@@ -523,7 +523,7 @@ describe("Reopening a ledger", function () {
     for (let i = 0; i < 200; i++) {
       // console.log("iteration", i);
       // console.time("db open");
-      const db = fireproof("test-reopen", { autoCompact: 1000 }); // try with 10
+      const db = lucix("test-reopen", { autoCompact: 1000 }); // try with 10
       // assert(db._crdt.ready);
       await db.ready();
       // console.timeEnd("db open");
@@ -560,7 +560,7 @@ describe("Reopening a ledger with indexes", function () {
   });
   beforeEach(async () => {
     await sthis.start();
-    db = fireproof("test-reopen-idx");
+    db = lucix("test-reopen-idx");
     const ok = await db.put({ _id: "test", foo: "bar" });
     expect(ok.id).toBe("test");
 
@@ -605,7 +605,7 @@ describe("Reopening a ledger with indexes", function () {
   });
 
   it("should have the same data on reopen", async () => {
-    const db2 = fireproof("test-reopen-idx");
+    const db2 = lucix("test-reopen-idx");
     const doc = await db2.get<FooType>("test");
     expect(doc.foo).toBe("bar");
     expect(db2.ledger.crdt.clock.head).toBeTruthy();
@@ -620,7 +620,7 @@ describe("Reopening a ledger with indexes", function () {
     expect(r0.rows.length).toBe(1);
     expect(r0.rows[0].key).toBe("bar");
 
-    const db2 = fireproof("test-reopen-idx");
+    const db2 = lucix("test-reopen-idx");
     const doc = await db2.get<FooType>("test");
     expect(doc.foo).toBe("bar");
     expect(db2.ledger.crdt.clock.head).toBeTruthy();
@@ -635,7 +635,7 @@ describe("Reopening a ledger with indexes", function () {
   //   equals(r0.rows.length, 1)
   //   equals(r0.rows[0].key, 'bar')
 
-  //   const db2 = fireproof('test-reopen-idx')
+  //   const db2 = lucix('test-reopen-idx')
   //   const d2 = await db2.get('test')
   //   equals(d2.foo, 'bar')
   //   didMap = false
@@ -655,7 +655,7 @@ describe("basic js verify", function () {
     await sthis.start();
   });
   it("should include cids in arrays", async () => {
-    const db = fireproof("test-verify");
+    const db = lucix("test-verify");
     const ok = await db.put({ _id: "test", foo: ["bar", "bam"] });
     expect(ok.id).toBe("test");
     const ok2 = await db.put({ _id: "test2", foo: ["bar", "bam"] });
@@ -708,7 +708,7 @@ describe("same workload twice, same CID", function () {
     let ok: DocResponse;
     await sthis.start();
     // todo this fails because the test setup doesn't properly configure both ledgers to use the same key
-    dbA = fireproof("test-dual-workload-a", configA);
+    dbA = lucix("test-dual-workload-a", configA);
     await dbA.destroy();
     for (const doc of docs) {
       ok = await dbA.put(doc);
@@ -718,7 +718,7 @@ describe("same workload twice, same CID", function () {
     headA = dbA.ledger.crdt.clock.head.toString();
 
     // todo this fails because the test setup doesn't properly configure both ledgers to use the same key
-    dbB = fireproof("test-dual-workload-b", configB);
+    dbB = lucix("test-dual-workload-b", configB);
     await dbA.destroy();
     for (const doc of docs) {
       ok = await dbB.put(doc);

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
-import { useFireproof } from "use-fireproof";
+import { useLucix } from "use-lucix";
 import { TodoStorage } from "../types/todo";
 import { TodoCard } from "../components/TodoCard";
 import { DATABASE_CONFIG } from "../config/database";
@@ -8,7 +8,7 @@ import { getEmptyTodo } from "../utils/todoUtils";
 
 export function Home() {
   const navigate = useNavigate();
-  const { database, useLiveQuery } = useFireproof(DATABASE_CONFIG.name);
+  const { database, useLiveQuery } = useLucix(DATABASE_CONFIG.name);
   const empty = getEmptyTodo();
 
   const { docs: todos } = useLiveQuery<TodoStorage>("type");

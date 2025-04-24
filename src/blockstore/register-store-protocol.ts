@@ -107,8 +107,8 @@ function defaultURI(sthis: SuperThis) {
   const rt = runtimeFn();
   return (
     BuildURI.from("file://")
-      // .pathname(`${sthis.env.get("HOME")}/.fireproof/${FILESTORE_VERSION.replace(/-.*$/, "")}`)
-      .pathname(`${sthis.env.get("HOME")}/.fireproof/${FILESTORE_VERSION.replace(/-.*$/, "")}`)
+      // .pathname(`${sthis.env.get("HOME")}/.lucix/${FILESTORE_VERSION.replace(/-.*$/, "")}`)
+      .pathname(`${sthis.env.get("HOME")}/.lucix/${FILESTORE_VERSION.replace(/-.*$/, "")}`)
       .setParam(PARAM.VERSION, FILESTORE_VERSION)
       .setParam(PARAM.URL_GEN, "default")
       .setParam(PARAM.RUNTIME, rt.isNodeIsh ? "node" : rt.isDeno ? "deno" : "unknown")
@@ -139,7 +139,7 @@ if (runtimeFn().isBrowser) {
         .URI();
     },
     gateway: async () => {
-      const { GatewayImpl } = await import("@fireproof/core/indexeddb");
+      const { GatewayImpl } = await import("@lucix/core/indexeddb");
       return new GatewayImpl();
     },
   });

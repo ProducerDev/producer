@@ -1,5 +1,5 @@
 import { BuildURI, URI, Logger } from "@adviser/cement";
-import { rt, WebCtx, WebToCloudCtx } from "use-fireproof";
+import { rt, WebCtx, WebToCloudCtx } from "use-lucix";
 
 export class IframeStrategy implements rt.gw.cloud.TokenStrategie {
   //   readonly opts: WebToCloudCtx

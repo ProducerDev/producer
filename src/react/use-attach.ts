@@ -1,6 +1,6 @@
 /// <reference lib="dom" />
 
-import { Database, falsyToUndef } from "@fireproof/core";
+import { Database, falsyToUndef } from "@lucix/core";
 import { useEffect, useState } from "react";
 import { AttachState, UseFPConfig, WebToCloudCtx } from "./types.js";
 
@@ -14,8 +14,8 @@ class WebCtxImpl implements WebToCloudCtx {
   private opts: Partial<WebToCloudCtx>;
 
   constructor(opts: Partial<WebToCloudCtx>) {
-    this.dashboardURI = opts.dashboardURI || "https://dev.connect.fireproof.direct/fp/cloud/api/token";
-    this.uiURI = opts.uiURI || "https://dev.connect.fireproof.direct/api";
+    this.dashboardURI = opts.dashboardURI || "https://dev.connect.lucix.direct/fp/cloud/api/token";
+    this.uiURI = opts.uiURI || "https://dev.connect.lucix.direct/api";
     this.tokenKey = opts.tokenKey || "fpToken";
     this.opts = opts;
   }

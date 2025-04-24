@@ -1,4 +1,4 @@
-import { ensureSuperThis } from "@fireproof/core";
+import { ensureSuperThis } from "@lucix/core";
 import { inject } from "vitest";
 
 export function testSuperThis() {

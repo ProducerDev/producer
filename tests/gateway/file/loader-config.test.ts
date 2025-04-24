@@ -1,5 +1,5 @@
 import { BuildURI, CoerceURI, runtimeFn, URI } from "@adviser/cement";
-import { fireproof, PARAM, rt, SuperThis } from "@fireproof/core";
+import { lucix, PARAM, rt, SuperThis } from "@lucix/core";
 import { mockSuperThis } from "../../helpers.js";
 
 function dataDir(sthis: SuperThis, name?: string, base?: CoerceURI): URI {
@@ -7,7 +7,7 @@ function dataDir(sthis: SuperThis, name?: string, base?: CoerceURI): URI {
     const home = sthis.env.get("HOME") || "./";
     base =
       sthis.env.get("FP_STORAGE_URL") ||
-      `file://${sthis.pathOps.join(home, ".fireproof", rt.FILESTORE_VERSION.replace(/-.*$/, ""))}?${PARAM.URL_GEN}=default`;
+      `file://${sthis.pathOps.join(home, ".lucix", rt.FILESTORE_VERSION.replace(/-.*$/, ""))}?${PARAM.URL_GEN}=default`;
   }
   return URI.from(base.toString())
     .build()
@@ -33,7 +33,7 @@ describe("config file gateway", () => {
   });
 
   it("loader", async () => {
-    const db = fireproof(my_app());
+    const db = lucix(my_app());
     await db.put({ name: "my-app" });
     expect(db.ledger.name).toBe(my_app());
 
@@ -110,7 +110,7 @@ describe("config file gateway", () => {
       /* */
     });
 
-    const db = fireproof(my_app(), { storeUrls: { base } });
+    const db = lucix(my_app(), { storeUrls: { base } });
     // console.log(`>>>>>>>>>>>>>>>file-path`)
     await db.put({ name: "my-app" });
     expect(db.ledger.name).toBe(my_app());
@@ -175,15 +175,15 @@ describe("config file gateway", () => {
       /* */
     });
 
-    expect(baseDir).toMatch(new RegExp(`/\\.fireproof/${rt.FILESTORE_VERSION.replace(/-file/, "")}/${my_app()}`));
+    expect(baseDir).toMatch(new RegExp(`/\\.lucix/${rt.FILESTORE_VERSION.replace(/-file/, "")}/${my_app()}`));
 
-    const db = fireproof(my_app());
+    const db = lucix(my_app());
     await db.put({ name: "my-app" });
     expect(db.ledger.name).toBe(my_app());
     const carStore = await db.ledger.crdt.blockstore.loader.attachedStores.local().active.car;
 
     expect(carStore?.url().asObj()).toEqual({
-      pathname: `${sthis.env.get("HOME")}/.fireproof/v0.19`,
+      pathname: `${sthis.env.get("HOME")}/.lucix/v0.19`,
       protocol: "file:",
       style: "path",
       searchParams: {
@@ -202,7 +202,7 @@ describe("config file gateway", () => {
 
     const fileStore = await db.ledger.crdt.blockstore.loader.attachedStores.local().active.file;
     expect(fileStore?.url().asObj()).toEqual({
-      pathname: `${sthis.env.get("HOME")}/.fireproof/v0.19`,
+      pathname: `${sthis.env.get("HOME")}/.lucix/v0.19`,
       protocol: "file:",
       style: "path",
       searchParams: {
@@ -217,7 +217,7 @@ describe("config file gateway", () => {
     });
     const metaStore = await db.ledger.crdt.blockstore.loader.attachedStores.local().active.meta;
     expect(metaStore?.url().asObj()).toEqual({
-      pathname: `${sthis.env.get("HOME")}/.fireproof/v0.19`,
+      pathname: `${sthis.env.get("HOME")}/.lucix/v0.19`,
       protocol: "file:",
       style: "path",
       searchParams: {
@@ -250,7 +250,7 @@ describe("config file gateway", () => {
       /* */
     });
 
-    const db = fireproof(my_app());
+    const db = lucix(my_app());
     await db.put({ name: "my-app" });
     expect(db.ledger.name).toBe(my_app());
     const carStore = await db.ledger.crdt.blockstore.loader.attachedStores.local().active.car;

@@ -3,7 +3,7 @@ import { drizzle } from "drizzle-orm/libsql";
 import { mockJWK, portRandom, setupBackendNode } from "../node/test-helper.js";
 import { createClient } from "@libsql/client";
 import { $ } from "zx";
-import { ensureSuperThis, rt } from "@fireproof/core";
+import { ensureSuperThis, rt } from "@lucix/core";
 import type { TestProject } from "vitest/node";
 import { setTestEnv } from "../../test-global-helper.js";
 

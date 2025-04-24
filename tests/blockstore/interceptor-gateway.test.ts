@@ -1,5 +1,5 @@
 import { BuildURI, Result, URI } from "@adviser/cement";
-import { bs, rt, fireproof, SuperThis } from "@fireproof/core";
+import { bs, rt, lucix, SuperThis } from "@lucix/core";
 
 class TestInterceptor extends bs.PassThroughGateway {
   readonly fn = vitest.fn();
@@ -120,7 +120,7 @@ export class URITrackGateway implements bs.Gateway {
 describe("InterceptorGateway", () => {
   it("passthrough", async () => {
     const gwi = new TestInterceptor();
-    const db = fireproof("interceptor-gateway", {
+    const db = lucix("interceptor-gateway", {
       gatewayInterceptor: gwi,
     });
     expect(
@@ -215,7 +215,7 @@ describe("InterceptorGateway", () => {
         return new URITrackGateway(sthis, new Map<string, Uint8Array>(), gwUris);
       },
     });
-    const db = fireproof("interceptor-gateway", {
+    const db = lucix("interceptor-gateway", {
       storeUrls: {
         base: "uriTest://inspector-gateway",
       },

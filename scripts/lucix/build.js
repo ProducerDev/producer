@@ -4,7 +4,7 @@ import { createBuildSettings } from "./settings.js";
 async function buildProject() {
   const buildConfigs = createBuildSettings();
 
-  console.log("Building FIREPROOF", buildConfigs);
+  console.log("Building LUCIX", buildConfigs);
   for (const config of buildConfigs) {
     console.log("Building", config.outfile);
     await build(config).catch(() => {

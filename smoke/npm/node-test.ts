@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import { fireproof, PACKAGE_VERSION, rt } from "@fireproof/core";
+import { lucix, PACKAGE_VERSION, rt } from "@lucix/core";
 
 async function main() {
-  // console.log(fireproof);
+  // console.log(lucix);
 
-  const db = fireproof("test-node");
+  const db = lucix("test-node");
 
   // const ok =
   await db.put({ _id: "test", hello: "world" });

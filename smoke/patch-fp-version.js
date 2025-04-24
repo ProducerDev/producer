@@ -5,7 +5,7 @@ function patch(dep, version) {
   if (!dep) {
     return;
   }
-  for (const i of ["@fireproof/core", "use-fireproof"]) {
+  for (const i of ["@lucix/core", "use-lucix"]) {
     if (dep[i]) {
       dep[i] = version;
     }

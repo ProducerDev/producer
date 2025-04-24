@@ -1,7 +1,7 @@
-import { fireproof } from "@fireproof/core";
+import { lucix } from "@lucix/core";
 import { mockSuperThis } from "../../helpers.js";
 
-describe("fireproof config indexeddb", () => {
+describe("lucix config indexeddb", () => {
   const _my_app = "my-app";
   function my_app() {
     return _my_app;
@@ -12,7 +12,7 @@ describe("fireproof config indexeddb", () => {
   });
 
   it("indexeddb-loader", async () => {
-    const db = fireproof(my_app());
+    const db = lucix(my_app());
     await db.put({ name: "my-app" });
     expect(db.ledger.name).toBe(my_app());
 

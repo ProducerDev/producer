@@ -1,8 +1,8 @@
-import { FPContext, rt } from "@fireproof/core";
-import { defaultWebToCloudOpts, WebCtx, WebToCloudCtx } from "@fireproof/core/react";
+import { FPContext, rt } from "@lucix/core";
+import { defaultWebToCloudOpts, WebCtx, WebToCloudCtx } from "@lucix/core/react";
 
-export * from "@fireproof/core/react";
-export * from "@fireproof/core";
+export * from "@lucix/core/react";
+export * from "@lucix/core";
 export * from "./iframe-strategy.js";
 export * from "./redirect-strategy.js";
 

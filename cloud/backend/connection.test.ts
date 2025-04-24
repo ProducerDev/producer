@@ -1,4 +1,4 @@
-import { ps, SuperThis } from "@fireproof/core";
+import { ps, SuperThis } from "@lucix/core";
 import { Result, URI } from "@adviser/cement";
 // import { HonoServer } from "./hono-server.js";
 // import { Hono } from "hono";

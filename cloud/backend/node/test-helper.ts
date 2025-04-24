@@ -1,5 +1,5 @@
 import { BuildURI, CoerceURI, Result, URI } from "@adviser/cement";
-import { SuperThis, rt, ps } from "@fireproof/core";
+import { SuperThis, rt, ps } from "@lucix/core";
 import type { GenerateKeyPairOptions } from "jose/key/generate/keypair";
 import { HonoServer } from "../hono-server.js";
 import { NodeHonoFactory } from "./node-hono-server.js";

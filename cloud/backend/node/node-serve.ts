@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { HonoServer } from "../hono-server.js";
 import { NodeHonoFactory } from "./node-hono-server.js";
 import { serve } from "@hono/node-server";
-import { ensureSuperThis, ps } from "@fireproof/core";
+import { ensureSuperThis, ps } from "@lucix/core";
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 

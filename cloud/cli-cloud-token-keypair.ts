@@ -1,4 +1,4 @@
-import { rt } from "@fireproof/core";
+import { rt } from "@lucix/core";
 import { command } from "cmd-ts";
 
 export const GenerateKeyPairCmd = command({

@@ -1,15 +1,15 @@
-# <img src="https://fireproof.storage/static/img/flame.svg" alt="Fireproof logo" width="25"> [Fireproof](https://fireproof.storage) database API
+# <img src="https://lucix.storage/static/img/flame.svg" alt="Lucix logo" width="25"> [Lucix](https://lucix.storage) database API
 
 <p align="right">
-  <img src="https://img.shields.io/bundlephobia/minzip/%40fireproof%2Fcore" alt="Package size">
-  <a href="https://github.com/fireproof-storage/fireproof/actions/workflows/ci.yaml">
-    <img src="https://github.com/fireproof-storage/fireproof/actions/workflows/ci.yaml/badge.svg" alt="Build status">
+  <img src="https://img.shields.io/bundlephobia/minzip/%40lucix%2Fcore" alt="Package size">
+  <a href="https://github.com/lucix-storage/lucix/actions/workflows/ci.yaml">
+    <img src="https://github.com/lucix-storage/lucix/actions/workflows/ci.yaml/badge.svg" alt="Build status">
   </a>
 </p>
 
-Fireproof is a lightweight embedded document database with encrypted live sync, designed to make browser apps easy. Use it in any JavaScript environment with a unified API that works both in React (with hooks) and as a standalone core API.
+Lucix is a lightweight embedded document database with encrypted live sync, designed to make browser apps easy. Use it in any JavaScript environment with a unified API that works both in React (with hooks) and as a standalone core API.
 
-[Point AI coders to these docs.](https://use-fireproof.com/llms-full.txt)
+[Point AI coders to these docs.](https://use-lucix.com/llms-full.txt)
 
 ## Key Features
 
@@ -18,45 +18,45 @@ Fireproof is a lightweight embedded document database with encrypted live sync, 
 - **Unified API:** TypeScript works with Deno, Bun, Node.js, and the browser.
 - **React Hooks:** Leverage `useLiveQuery` and `useDocument` for live collaboration.
 
-Fireproof enforces cryptographic causal consistency and ledger integrity using hash history, providing git-like versioning with lightweight blockchain-style verification. Data is stored and replicated as content-addressed encrypted blobs, making it safe and easy to sync via commodity object storage providers.
+Lucix enforces cryptographic causal consistency and ledger integrity using hash history, providing git-like versioning with lightweight blockchain-style verification. Data is stored and replicated as content-addressed encrypted blobs, making it safe and easy to sync via commodity object storage providers.
 
 ## Installation
 
-The `use-fireproof` package provides both the core API and React hooks:
+The `use-lucix` package provides both the core API and React hooks:
 
 ```sh
-npm install use-fireproof
+npm install use-lucix
 ```
 
 Works with ⚡️ ESM.sh:
 
 ```js
-import { useFireproof } from "https://esm.sh/use-fireproof";
+import { useLucix } from "https://esm.sh/use-lucix";
 ```
 
 Or install the core ledger in any JavaScript environment:
 
 ```sh
-npm install @fireproof/core
+npm install @lucix/core
 ```
 
-Add the ledger to any web page via HTML script tag (global is `Fireproof`):
+Add the ledger to any web page via HTML script tag (global is `Lucix`):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@fireproof/core/dist/browser/fireproof.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@lucix/core/dist/browser/lucix.global.js"></script>
 ```
 
-Deliver generated solutions as runnable micro applications via ChatGPT Canvas, v0, bolt.new, or Claude Artifacts. Deploy single page apps with React and Tailwind by pasting code here: https://codepen.io/useFireproof/pen/MYgNYdx
+Deliver generated solutions as runnable micro applications via ChatGPT Canvas, v0, bolt.new, or Claude Artifacts. Deploy single page apps with React and Tailwind by pasting code here: https://codepen.io/useLucix/pen/MYgNYdx
 
 ## ⚛️ React Usage
 
-React hooks are the recommended way to use Fireproof in LLM code generation contexts:
+React hooks are the recommended way to use Lucix in LLM code generation contexts:
 
 ```js
-import { useFireproof } from "use-fireproof";
+import { useLucix } from "use-lucix";
 
 function App() {
-  const { database, useLiveQuery, useDocument } = useFireproof("my-ledger");
+  const { database, useLiveQuery, useDocument } = useLucix("my-ledger");
 
   // Create a new document with useDocument
   const { doc, merge, submit } = useDocument({ text: "" });
@@ -82,11 +82,11 @@ function App() {
 }
 ```
 
-Read the [step-by-step React tutorial](https://use-fireproof.com/docs/react-tutorial) to get started or check the [full LLM documentation](https://use-fireproof.com/llms-full.txt) for more examples.
+Read the [step-by-step React tutorial](https://use-lucix.com/docs/react-tutorial) to get started or check the [full LLM documentation](https://use-lucix.com/llms-full.txt) for more examples.
 
 ### Working with Images
 
-Fireproof makes it easy to store and display images in your applications. The `_files` property and `ImgFile` component handle all the complexities of file storage and retrieval:
+Lucix makes it easy to store and display images in your applications. The `_files` property and `ImgFile` component handle all the complexities of file storage and retrieval:
 
 ```js
 // Store an image from a file input
@@ -112,16 +112,16 @@ function ImageDisplay({ doc }) {
 }
 ```
 
-The `ImgFile` component automatically handles loading and displaying images from Fireproof's storage, with all the expected props of a standard image element. For more in-depth examples see our [llms-full.txt](https://use-fireproof.com/llms-full.txt) documentation.
+The `ImgFile` component automatically handles loading and displaying images from Lucix's storage, with all the expected props of a standard image element. For more in-depth examples see our [llms-full.txt](https://use-lucix.com/llms-full.txt) documentation.
 
 ## JavaScript Core API
 
 The document database API will feel familiar to those who have used other document databases:
 
 ```js
-import { fireproof } from "@fireproof/core";
+import { lucix } from "@lucix/core";
 
-const db = fireproof("music-app");
+const db = lucix("music-app");
 
 await db.put({ _id: "beyonce", name: "Beyoncé", hitSingles: 29 });
 
@@ -135,20 +135,20 @@ beyonceDoc.hitSingles += 1;
 await db.put(beyonceDoc);
 ```
 
-## Why choose Fireproof
+## Why choose Lucix
 
-Compared to other embedded databases, Fireproof:
+Compared to other embedded databases, Lucix:
 
 - Is network aware, encrypted, and multi-writer safe
 - Is designed for real-time collaboration with CRDTs
 - Offers cryptographic causal integrity for all operations
 - Is built for the web, with a small package size and no wasm
 
-Deliver interactive experiences without waiting on the backend. Fireproof runs in any cloud, browser, or edge environment, so your application can access data anywhere.
+Deliver interactive experiences without waiting on the backend. Lucix runs in any cloud, browser, or edge environment, so your application can access data anywhere.
 
 ## Use cases
 
-Fireproof is especially useful for:
+Lucix is especially useful for:
 
 - AI-generated apps and rapid prototypes
 - Collaborative editing
@@ -156,9 +156,9 @@ Fireproof is especially useful for:
 - Personalization and configuration
 - AI copilot safety
 
-With Fireproof, you **build first** and sync via your cloud of choice when you are ready, making it perfect for LLM code generation contexts and rapid development.
+With Lucix, you **build first** and sync via your cloud of choice when you are ready, making it perfect for LLM code generation contexts and rapid development.
 
-[Get the latest roadmap updates on our blog](https://fireproof.storage/blog/) or join our [Discord](https://discord.gg/cCryrNHePH) to collaborate. Read the docs to learn more about the [architecture](https://use-fireproof.com/docs/architecture).
+[Get the latest roadmap updates on our blog](https://lucix.storage/blog/) or join our [Discord](https://discord.gg/cCryrNHePH) to collaborate. Read the docs to learn more about the [architecture](https://use-lucix.com/docs/architecture).
 
 ### Debug
 
@@ -233,15 +233,15 @@ but there is a warning emitted if you use this feature, and roadmap plans for mo
 
 ### Deno
 
-Fireproof is compatible with Deno. To runit in Deno you need to add the following flags:
+Lucix is compatible with Deno. To runit in Deno you need to add the following flags:
 
 Currently the tests are not run with deno -- TODO
 
 It might be that using our provided deno.json is somekind of odd
---- TODO is to add fireproof to jsr and deno.land
+--- TODO is to add lucix to jsr and deno.land
 
 ```shell
-deno run --config node_modules/@fireproof/core/deno.json --allow-read --allow-write --allow-env --unstable-sloppy-imports ./node-test.ts
+deno run --config node_modules/@lucix/core/deno.json --allow-read --allow-write --allow-env --unstable-sloppy-imports ./node-test.ts
 ```
 
 ### Create Docs
@@ -254,9 +254,9 @@ pnpm run build:docs
 
 ## Thanks 🙏
 
-Fireproof is a synthesis of work done by people in the web community over the years. I couldn't even begin to name all the folks who made pivotal contributions. Without npm, React, and VS Code all this would have taken so much longer. Thanks to everyone who supported me getting into ledger development via Apache CouchDB, one of the original document ledgers. The distinguishing work on immutable data-structures comes from the years of consideration [IPFS](https://ipfs.tech), [IPLD](https://ipld.io), and the [Filecoin APIs](https://docs.filecoin.io) have enjoyed.
+Lucix is a synthesis of work done by people in the web community over the years. I couldn't even begin to name all the folks who made pivotal contributions. Without npm, React, and VS Code all this would have taken so much longer. Thanks to everyone who supported me getting into ledger development via Apache CouchDB, one of the original document ledgers. The distinguishing work on immutable data-structures comes from the years of consideration [IPFS](https://ipfs.tech), [IPLD](https://ipld.io), and the [Filecoin APIs](https://docs.filecoin.io) have enjoyed.
 
-Thanks to [Meno Abels](https://github.com/mabels) who has taken on the role of project lead engineer. Fireproof is rapidly becoming a mature solution.
+Thanks to [Meno Abels](https://github.com/mabels) who has taken on the role of project lead engineer. Lucix is rapidly becoming a mature solution.
 
 Thanks to Alan Shaw and Mikeal Rogers without whom this project would have never got started. The core Merkle hash-tree clock is based on [Alan's Pail](https://github.com/alanshaw/pail), and you can see the repository history goes all the way back to work begun as a branch of that repo. Mikeal wrote [the prolly trees implementation](https://github.com/mikeal/prolly-trees).
 
@@ -266,4 +266,4 @@ We love contributions. Feel free to [join in the conversation on Discord. All we
 
 # License
 
-Dual-licensed under [MIT or Apache 2.0](https://github.com/fireproof-storage/fireproof/blob/main/LICENSE.md)
+Dual-licensed under [MIT or Apache 2.0](https://github.com/lucix-storage/lucix/blob/main/LICENSE.md)

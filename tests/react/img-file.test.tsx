@@ -1,8 +1,8 @@
 import { render, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { ImgFile, bs } from "use-fireproof";
+import { ImgFile, bs } from "use-lucix";
 import { createElement } from "react";
-import type { DocFileMeta } from "use-fireproof";
+import type { DocFileMeta } from "use-lucix";
 
 // Extend HTMLElement to include querySelector for TypeScript
 

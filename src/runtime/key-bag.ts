@@ -458,7 +458,7 @@ const keyBagProviderFactories = new Map<string, KeyBagProviderFactoryItem>(
     {
       protocol: "indexeddb:",
       factory: async (url: URI, sthis: SuperThis) => {
-        const { KeyBagProviderImpl } = await import("@fireproof/core/indexeddb");
+        const { KeyBagProviderImpl } = await import("@lucix/core/indexeddb");
         return new KeyBagProviderImpl(url, sthis);
       },
     },
@@ -487,7 +487,7 @@ export function defaultKeyBagUrl(sthis: SuperThis): URI {
   } else {
     if (!bagFnameOrUrl) {
       const home = sthis.env.get("HOME");
-      bagFnameOrUrl = `${home}/.fireproof/keybag`;
+      bagFnameOrUrl = `${home}/.lucix/keybag`;
       url = URI.from(`file://${bagFnameOrUrl}`);
     } else {
       url = URI.from(bagFnameOrUrl);
@@ -515,7 +515,7 @@ export function defaultKeyBagOpts(sthis: SuperThis, kbo?: Partial<KeyBagOpts>): 
     } else {
       if (!bagFnameOrUrl) {
         const home = sthis.env.get("HOME");
-        bagFnameOrUrl = `${home}/.fireproof/keybag`;
+        bagFnameOrUrl = `${home}/.lucix/keybag`;
         url = URI.from(`file://${bagFnameOrUrl}`);
       } else {
         url = URI.from(bagFnameOrUrl);

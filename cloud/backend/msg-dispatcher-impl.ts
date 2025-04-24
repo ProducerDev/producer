@@ -1,4 +1,4 @@
-import { SuperThis, ps } from "@fireproof/core";
+import { SuperThis, ps } from "@lucix/core";
 import { MsgDispatcher } from "./msg-dispatch.js";
 import { buildEventGetMeta, MsgIsResPutMeta } from "../../src/protocols/cloud/msg-types-meta.js";
 import { metaMerger } from "./meta-merger/meta-merger.js";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useFireproof } from "use-fireproof";
+import { useLucix } from "use-lucix";
 import { TodoStorage } from "../types/todo";
 import { getEmptyTodo } from "../utils/todoUtils";
 import { DATABASE_CONFIG } from "../config/database";
@@ -8,7 +8,7 @@ import { DATABASE_CONFIG } from "../config/database";
 export function TodoEditor() {
   const navigate = useNavigate();
   const { todoId } = useParams();
-  const { useDocument } = useFireproof(DATABASE_CONFIG.name);
+  const { useDocument } = useLucix(DATABASE_CONFIG.name);
   const [last_ms, setLast] = useState(0);
   const emptyWithId = getEmptyTodo(todoId || "");
   const { doc, merge, submit } = useDocument<TodoStorage>(() => emptyWithId);

@@ -1,20 +1,20 @@
 {
-  "name": "@fireproof/monorepo",
+  "name": "@lucix/monorepo",
   "version": "0.0.0-smoke",
   "private": true,
   "description": "Live ledger for the web",
   "type": "module",
   "scripts": {
     "fppublish": "pnpm run '/publish:/'",
-    "fppublish:fireproof-core": "tsx ./publish-package.ts ./dist/fireproof-core/package.json",
-    "fppublish:use-fireproof": "tsx ./publish-package.ts ./dist/use-fireproof/package.json",
-    "prebuild": "rm -rf dist/fireproof-core dist/use-fireproof",
+    "fppublish:lucix-core": "tsx ./publish-package.ts ./dist/lucix-core/package.json",
+    "fppublish:use-lucix": "tsx ./publish-package.ts ./dist/use-lucix/package.json",
+    "prebuild": "rm -rf dist/lucix-core dist/use-lucix",
     "build": "pnpm run '/build:/' && pnpm run '/pub:/'",
     "build:tsc": "rm -rf ./dist/tsc ; tsc",
     "build:tsup": "tsup",
     "build:docs": "if [ \"$FP_CI\" = 'fp_ci' ] ; then bash build-docs.sh; fi",
-    "pub:fireproof-core": "mkdir -p ./dist/fireproof-core ; cp -pr tests ./dist/fireproof-core; cp -pr dist/tsc/src/* ./dist/fireproof-core;  tsx ./version-copy-package.ts ./dist/fireproof-core/package-fireproof-core.json",
-    "pub:use-fireproof": "mkdir -p ./dist/use-fireproof ; cp -pr dist/tsc/src/use-fireproof/* ./dist/use-fireproof; tsx ./version-copy-package.ts ./dist/use-fireproof/package-use-fireproof.json",
+    "pub:lucix-core": "mkdir -p ./dist/lucix-core ; cp -pr tests ./dist/lucix-core; cp -pr dist/tsc/src/* ./dist/lucix-core;  tsx ./version-copy-package.ts ./dist/lucix-core/package-lucix-core.json",
+    "pub:use-lucix": "mkdir -p ./dist/use-lucix ; cp -pr dist/tsc/src/use-lucix/* ./dist/use-lucix; tsx ./version-copy-package.ts ./dist/use-lucix/package-use-lucix.json",
     "presmoke": "if [ \"$FP_CI\" != 'fp_ci' ] ; then pnpm run build; fi; pnpm run presmoke:publish",
     "presmoke:publish": "bash -x smoke/publish-local-registry.sh",
     "smoke": "pnpm run '/^smoke:/'",
@@ -100,12 +100,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fireproof-storage/fireproof.git"
+    "url": "git+https://github.com/lucix-storage/lucix.git"
   },
   "bugs": {
-    "url": "https://github.com/fireproof-storage/fireproof/issues"
+    "url": "https://github.com/lucix-storage/lucix/issues"
   },
-  "homepage": "https://github.com/fireproof-storage/fireproof#readme",
+  "homepage": "https://github.com/lucix-storage/lucix#readme",
   "dependencies": {
     "@adviser/cement": "~0.4.14",
     "@ipld/car": "^5.4.0",

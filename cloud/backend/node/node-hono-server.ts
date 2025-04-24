@@ -11,7 +11,7 @@ import {
 } from "../hono-server.js";
 import { ResolveOnce, URI } from "@adviser/cement";
 import { Context, Hono } from "hono";
-import { ensureLogger, SuperThis, ps, rt } from "@fireproof/core";
+import { ensureLogger, SuperThis, ps, rt } from "@lucix/core";
 // import { SQLDatabase } from "./meta-merger/abstract-sql.js";
 import { WSRoom } from "../ws-room.js";
 import { ConnItem } from "../msg-dispatch.js";

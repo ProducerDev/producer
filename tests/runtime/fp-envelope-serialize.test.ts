@@ -1,4 +1,4 @@
-import { rt, bs } from "@fireproof/core";
+import { rt, bs } from "@lucix/core";
 import { mockSuperThis, simpleCID } from "../helpers.js";
 import { BuildURI, Result } from "@adviser/cement";
 import { toJSON } from "multiformats/link";

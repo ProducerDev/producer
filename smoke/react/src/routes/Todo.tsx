@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFireproof } from "use-fireproof";
+import { useLucix } from "use-lucix";
 
 // Define default values for a new todo to avoid undefined
 const DEFAULT_TODO = {
@@ -31,7 +31,7 @@ function sanitizeTodo(todo: Partial<TodoData>): TodoData {
 }
 
 export default function TodoList() {
-  const { useDocument, useLiveQuery } = useFireproof("TodoDB");
+  const { useDocument, useLiveQuery } = useLucix("TodoDB");
   const [selectedTodo, setSelectedTodo] = useState<string>("");
   const todos = useLiveQuery<Todo>("date", { limit: 1000, descending: true });
   const {
@@ -94,7 +94,7 @@ interface TodoEditorProps {
 }
 
 function TodoEditor({ id, onClose }: TodoEditorProps) {
-  const { useDocument } = useFireproof("TodoDB");
+  const { useDocument } = useLucix("TodoDB");
   // When loading an existing document, ensure default values for all fields
   const {
     doc: todo,
