@@ -1,6 +1,6 @@
 Lucix is a lightweight embedded document database with encrypted live sync, designed to make browser apps easy. Use it in any JavaScript environment with a unified API that works both in React (with hooks) and as a standalone core API.
 
-[Point AI coders to these docs.](https://lucix.dev)
+[View our docs.](https://lucix.dev/docs/welcome/index.html)
 
 ## Key Features
 
