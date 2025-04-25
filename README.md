@@ -1,6 +1,6 @@
 Lucix is a lightweight embedded document database with encrypted live sync, designed to make browser apps easy. Use it in any JavaScript environment with a unified API that works both in React (with hooks) and as a standalone core API.
 
-[Point AI coders to these docs.](https://use-lucix.com/llms-full.txt)
+[Point AI coders to these docs.](https://lucix.dev)
 
 ## Key Features
 
@@ -73,7 +73,7 @@ function App() {
 }
 ```
 
-Read the [step-by-step React tutorial](https://use-lucix.com/docs/react-tutorial) to get started or check the [full LLM documentation](https://use-lucix.com/llms-full.txt) for more examples.
+Read the [step-by-step React tutorial](https://lucix.dev/docs/welcome/index.html) to get started or check the [full LLM documentation](https://lucix.dev/) for more examples.
 
 ### Working with Images
 
@@ -103,7 +103,7 @@ function ImageDisplay({ doc }) {
 }
 ```
 
-The `ImgFile` component automatically handles loading and displaying images from Lucix's storage, with all the expected props of a standard image element. For more in-depth examples see our [llms-full.txt](https://use-lucix.com/llms-full.txt) documentation.
+The `ImgFile` component automatically handles loading and displaying images from Lucix's storage, with all the expected props of a standard image element. For more in-depth examples see our [llms-full.txt](https://lucix.dev/) documentation.
 
 ## JavaScript Core API
 
@@ -149,7 +149,7 @@ Lucix is especially useful for:
 
 With Lucix, you **build first** and sync via your cloud of choice when you are ready, making it perfect for LLM code generation contexts and rapid development.
 
-[Get the latest roadmap updates on our blog](https://lucix.storage/blog/) or join our [Discord](https://discord.gg/cCryrNHePH) to collaborate. Read the docs to learn more about the [architecture](https://use-lucix.com/docs/architecture).
+[Get the latest roadmap updates on our website](https://lucix.dev/) to collaborate. Read the docs to learn more about the [architecture](https://lucix.dev/docs/architecture/index.html).
 
 ### Debug
 
