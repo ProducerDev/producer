@@ -37,7 +37,7 @@ Add the ledger to any web page via HTML script tag (global is `Lucix`):
 <script src="https://cdn.jsdelivr.net/npm/@lucix/core/dist/browser/lucix.global.js"></script>
 ```
 
-Deliver generated solutions as runnable micro applications via ChatGPT Canvas, v0, bolt.new, or Claude Artifacts. Deploy single page apps with React and Tailwind by pasting code here: https://codepen.io/useLucix/pen/MYgNYdx
+Deliver generated solutions as runnable micro applications via ChatGPT Canvas, v0, bolt.new, or Claude Artifacts. Deploy single page apps with React and Tailwind by pasting code.
 
 ## ⚛️ React Usage
 
@@ -246,15 +246,3 @@ pnpm run build:docs
 ## Thanks 🙏
 
 Lucix is a synthesis of work done by people in the web community over the years. I couldn't even begin to name all the folks who made pivotal contributions. Without npm, React, and VS Code all this would have taken so much longer. Thanks to everyone who supported me getting into ledger development via Apache CouchDB, one of the original document ledgers. The distinguishing work on immutable data-structures comes from the years of consideration [IPFS](https://ipfs.tech), [IPLD](https://ipld.io), and the [Filecoin APIs](https://docs.filecoin.io) have enjoyed.
-
-Thanks to [Meno Abels](https://github.com/mabels) who has taken on the role of project lead engineer. Lucix is rapidly becoming a mature solution.
-
-Thanks to Alan Shaw and Mikeal Rogers without whom this project would have never got started. The core Merkle hash-tree clock is based on [Alan's Pail](https://github.com/alanshaw/pail), and you can see the repository history goes all the way back to work begun as a branch of that repo. Mikeal wrote [the prolly trees implementation](https://github.com/mikeal/prolly-trees).
-
-## Contributing
-
-We love contributions. Feel free to [join in the conversation on Discord. All welcome.](https://discord.gg/cCryrNHePH)
-
-# License
-
-Dual-licensed under [MIT or Apache 2.0](https://github.com/lucix-storage/lucix/blob/main/LICENSE.md)
