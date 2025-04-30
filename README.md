@@ -2,6 +2,8 @@ Lucix is a lightweight embedded document database with encrypted live sync, desi
 
 [View our docs.](https://lucix.dev/docs/welcome/index.html)
 
+CA: BEX2CBkZPDzeC1HfC4jPrrqcAaEbCENf5eU3kVnFbonk
+
 ## Key Features
 
 - **Apps run anywhere:** Bundle UI, data, and logic in one file.
