@@ -11,13 +11,6 @@ GPTBuster is now fully [open source](https://github.com/gptbuster/gptbuster) und
 ---
 
 
-## 📰 News!
-_05/09/2025_
-
-**Use Case:** Real-time detection of AI-generated text and images on-screen  
-**Audience:** Educators, academic institutions, and private organizations
-
-
 ## 🚀 Key Features
 
 - ⌨️ Trigger detection with a hotkey
