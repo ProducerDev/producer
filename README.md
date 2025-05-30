@@ -1,6 +1,6 @@
 ![logo](https://github.com/user-attachments/assets/0993a2c6-1dd1-4b4b-b087-0b7f088f49e1)
 
-
+CA# BbJre36TveegtSSKxoa6TLrNif9iKtWD4fZFRTk4pump
 
 gptBuster offers self-hosted security, prioritizing user privacy by using an innovative proof-of-work system to shield websites, APIs, and online services from spam and abuse. This approach avoids the intrusive cookies or fingerprinting methods common in traditional CAPTCHAs, ensuring robust protection while upholding privacy.
 
